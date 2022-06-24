@@ -2,8 +2,8 @@ import javax.swing.*;
 public class myFrame extends JFrame{
 	//public myPanel panel;
 
-	public final int Window_Width = 1000;
-	public final int Window_Height = 600;
+	//public final int Window_Width ;
+	//public final int Window_Height ;
 	myFrame(){
 		
 		this.setTitle("Maze Project");
@@ -20,8 +20,4 @@ public class myFrame extends JFrame{
 	}
 
 }
-class a{
-	public static void main(String[] args) {
-		new myFrame();
-	}
-}
+
