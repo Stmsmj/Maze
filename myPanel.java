@@ -138,7 +138,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
 		algoBox.setFocusable(false);
 		algoBox.addActionListener(this);
+<<<<<<< HEAD
 		mode = algoBox.getSelectedIndex();
+=======
+		mode = algoBox.getSelectedIndex(); // (1 = DFS &0 == BFS )
+>>>>>>> dd8bd1e704efb427a742544d1dc66ad897e63c93
 		Small_Panel.add(algoBox);
 		
 		Mode_Box_Label = new JLabel("Mode:");
