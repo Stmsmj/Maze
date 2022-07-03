@@ -100,7 +100,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		
 		
-		Speed_Slider = new JSlider(1,5,5);
+		Speed_Slider = new JSlider(1,6,3);
 		Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 230, 350, 40);
 		Speed_Slider.setPaintTrack(true);
 		Speed_Slider.setMajorTickSpacing(1);
