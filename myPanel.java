@@ -129,17 +129,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		
 		
-		// BFS_CheckBox = new JCheckBox();
-		// BFS_CheckBox.setBounds(Small_Panel.getSize().width/2-30, 285, 250, 30);
-		// BFS_CheckBox.setText("Breadth First Search");
-		// BFS_CheckBox.setFont(new Font("",Font.BOLD,15));
-		// BFS_CheckBox.setFocusable(false);
-		// Small_Panel.add(BFS_CheckBox);
-		
-		
-		
-		
-		
 		algoBox_Label = new JLabel("Pathfinding Algorithms");
 		algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
 		algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
