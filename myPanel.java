@@ -27,6 +27,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	
 	private JLabel Cell_Label;
 	private JComboBox DifficultyBox;
+	private JComboBox Mode_Box;
+	private JLabel Mode_Box_Label;
 	
 	private JLabel Speed_Label;
 	private JSlider Speed_Slider;
@@ -34,7 +36,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	private JCheckBox Maze_CheckBox;
 	
 	private JComboBox algoBox;
-	private int mode ;
+	private int mode,mode2 ;
 	private JLabel algoBox_Label;
 	
 	
@@ -65,7 +67,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		
 		
-		Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)-120-30, 30, 120, 50,new Color(102,80 ,153));
+		Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)+30, 120, 120, 50,new Color(102,80 ,153));
 		Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
 		Small_Panel.add(Start_Button);
 		Start_Button.addActionListener(this);
@@ -73,7 +75,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		
 		
-		reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+30, 30, 120, 50,Color.CYAN);
+		reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+30, 60, 120, 50,Color.CYAN);
 		reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
 		Small_Panel.add(reMaze_Button);
 		reMaze_Button.addActionListener(this);
@@ -81,7 +83,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		String[] Difficulties={"kids","medium","hard","legends","god mode"};
 		DifficultyBox= new JComboBox<String>(Difficulties);
-		DifficultyBox.setBounds((Window_W-Maze_Size)/2-(350/4), 150, 150, 50);
+		DifficultyBox.setBounds(30, 120, 150, 50);
 		DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
 		DifficultyBox.setFocusable(false);
 		DifficultyBox.addActionListener(this);
@@ -92,7 +94,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 		Cell_Label = new JLabel();
 		Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-		Cell_Label.setBounds(30, 130, 250, 20);
+		Cell_Label.setBounds(30, 100, 250, 20);
 		Cell_Label.setFont(new Font("MV Boli",Font.BOLD,18));
 		
 		Small_Panel.add(Cell_Label);
@@ -116,37 +118,44 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		Small_Panel.add(Speed_Label);
 		Small_Panel.add(Speed_Slider);
 		
-		
-		
 		Maze_CheckBox = new JCheckBox();
-		Maze_CheckBox.setBounds((int)(Small_Panel.getSize().width/2)-120-30, 95, 250, 20);
+		Maze_CheckBox.setBounds((int)30, 60, 180, 20);
 		Maze_CheckBox.setText("Generate instantly");
 		Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
 		Maze_CheckBox.setFocusable(false);
-	
-	
 		Small_Panel.add(Maze_CheckBox);
 		
-		
-		
 		algoBox_Label = new JLabel("Pathfinding Algorithms");
-		algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
+		algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 440, 220, 30);
 		algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
 		Small_Panel.add(algoBox_Label);
 		
 		
 		
-		String[] algoList = {"Breadth First Search(BFS)","Depth First Search(DFS)"};// (0 == BFS , 1 = DFS)
-		algoBox = new JComboBox(algoList);
-		algoBox.setBounds(Small_Panel.getSize().width/2-160, 400, 220, 30);
+		String[] algoList = {"Breadth First Search(BFS)","Depth First Search(DFS)"};
+		algoBox = new JComboBox<String>(algoList);
+		algoBox.setBounds(Small_Panel.getSize().width/2-160, 470, 220, 30);
 		algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
 		algoBox.setFocusable(false);
 		algoBox.addActionListener(this);
-		mode = algoBox.getSelectedIndex(); // (0 == BFS , 1 = DFS)
+		mode = algoBox.getSelectedIndex();
 		Small_Panel.add(algoBox);
 		
+		Mode_Box_Label = new JLabel("Mode:");
+		Mode_Box_Label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
+		Mode_Box_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(Mode_Box_Label);
 		
-	
+		
+		
+		String[] Mode_Box_List = {"Single Player","Pc"};
+		Mode_Box = new JComboBox<String>(Mode_Box_List);
+		Mode_Box.setBounds(Small_Panel.getSize().width/2-160, 400, 220, 30);
+		Mode_Box.setFont(new Font("MV Boli",Font.BOLD,15));
+		Mode_Box.setFocusable(false);
+		Mode_Box.addActionListener(this);
+		Small_Panel.add(Mode_Box);
+		mode2=Mode_Box.getSelectedIndex();
 		
 		
 
@@ -164,10 +173,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 				
 		
 		
-		
-		
-		
-		
 		initMaze();
 		tm.start();
 	}
@@ -180,13 +185,18 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	public void paintComponent(Graphics g) {
 		
 		if(maze.checkFinished()) {
-			reMaze_Button.setEnabled(true);
+			reMaze_Button.setEnabled(false);
+			Reset_Button.setEnabled(false);
+			DifficultyBox.setEnabled(false);
+			Start_Button.setEnabled(false);
 			Start_Solving_Button.setEnabled(true);
 			algoBox.setEnabled(true);
+			Mode_Box.setEnabled(true);
 		}else {
 			Start_Solving_Button.setEnabled(false);
 			Reset_Button.setEnabled(false);
 			algoBox.setEnabled(false);
+			Mode_Box.setEnabled(false);
 		}
 		
 		super.paintComponent(g);
@@ -201,9 +211,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		if(!flag) {
 			maze.drawPathFinder(g,mode);
 			if(maze.finish) {
-				Maze_CheckBox.setEnabled(true);
-				Start_Solving_Button.setEnabled(true);
+				Maze_CheckBox.setEnabled(false);
+				Start_Solving_Button.setEnabled(false);
 				Reset_Button.setEnabled(true);
+				reMaze_Button.setEnabled(true);
+				
 				tm.stop();
 			}
 		}
@@ -224,6 +236,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		tm.start();
 		running = -1;	
 		Start_Button.setEnabled(true);
+		DifficultyBox.setEnabled(true);
 		repaint();
 	}
 	
@@ -235,6 +248,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	
+		
 
 		if(e.getSource()==DifficultyBox) {
 			if(DifficultyBox.getSelectedIndex()==0) {
@@ -282,11 +296,18 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 		}
 		
-		
+		if (e.getSource()==Mode_Box) {
+			if (mode2==0) {
+				algoBox.setEnabled(false);
+			}else if (mode2==1) {
+				algoBox.setEnabled(false);
+			}
+		}
 		
 		if(e.getSource()==reMaze_Button) {
 			flag = true;
 			Maze_CheckBox.setEnabled(true);
+			reMaze_Button.setEnabled(false);
 			initMaze();
 			reset();
 			Start_Button.setText("Start");
@@ -296,6 +317,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 			
 		
 		if (e.getSource()==Start_Button) {
+			DifficultyBox.setEnabled(false);
 			running *= -1;
 			if(running == 1)
 				Start_Button.setText("Pause");
@@ -316,6 +338,9 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		if(e.getSource() == Start_Solving_Button) {
 			Maze_CheckBox.setSelected(false);
 			Maze_CheckBox.setEnabled(false);
+			algoBox.setEnabled(false);
+			Mode_Box.setEnabled(false);
+			
 			
 			if(flag) {
 				maze.initStartAndEnd();
