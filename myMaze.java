@@ -16,7 +16,7 @@ public class myMaze{
 
     private cells Start,End;
     private Queue<cells> Visited_Queue;
-    private Stack<cells> visitedS;
+    private Stack<cells> VisitedS;
 
     myMaze(int mazeSize,int cellSize){
         Maze_Size = mazeSize;
@@ -32,8 +32,8 @@ public class myMaze{
                 grids[row][col] = new cells(row,col,Cell_Size);
             }
         }
-        current = grids[new Random().NextInt(w)][new Random().NextInt(w)];
-        current.visited = true;
+        current = grids[new Random().nextInt(w)][new Random().nextInt(w)];
+        current.Visited = true;
         Visited_Stack = new Stack<cells>();
         running = true;
 
@@ -41,7 +41,7 @@ public class myMaze{
     public void resetMaze(){
         for (int row=0;row<w;row++) {
             for (int col =0;col<w;col++) {
-                grids[row][col].resetCell();
+                grids[row][col].Reset_Cell();
             }
         }
         finish = false;
@@ -50,15 +50,15 @@ public class myMaze{
     public void drawMaze(Graphics g) {
         for(int i = 0;i<w;i++) {
             for(int j = 0;j<w;j++) {
-                grids[i][j].drawBox(g, new Color(100,50,200,190));
-                grids[i][j].drawCell(g);
+                grids[i][j].Draw_Box(g, new Color(100,50,200,190));
+                grids[i][j].Draw_Cell(g);
             }
         }
     }
     public void mazeAlgorithm(Graphics g) {
         if(running) {
             if(Count_Visited<=w*w)
-                current.drawBox(g,new Color(0,255,0,100));
+                current.Draw_Box(g,new Color(0,255,0,100));
             update();
             System.out.println(Count_Visited);
         }
@@ -78,13 +78,13 @@ public class myMaze{
             x.drawPath(g, Color.RED);
         }
 
-        Start.drawBox(g,new Color(0, 0, 250));
-        End.drawBox(g,new Color(0, 250, 0));
+        Start.Draw_Box(g,new Color(0, 0, 250));
+        End.Draw_Box(g,new Color(0, 250, 0));
 
 
         for(int i = 0;i<w;i++) {
             for(int j = 0;j<w;j++) {
-                grids[i][j].drawCell(g);
+                grids[i][j].Draw_Cell(g);
             }
         }
 
@@ -96,17 +96,17 @@ public class myMaze{
     }
 
     public void mazeAlgorithm() {
-        Stack<cells> visitedList = new Stack<>();
-        current.visited = true;
-        visitedList.push(current);
-        while(!visitedList.isEmpty()) {
-            current = visitedList.pop();
+        Stack<cells> VisitedList = new Stack<>();
+        current.Visited = true;
+        VisitedList.push(current);
+        while(!VisitedList.isEmpty()) {
+            current = VisitedList.pop();
             if (hasNeighbor(current)) {
-                visitedList.push(current);
+                VisitedList.push(current);
                 Next = getOneRandomNeighbor(current);
                 wallBreaker(current, Next);
-                Next.visited = true;
-                visitedList.push(Next);
+                Next.Visited = true;
+                VisitedList.push(Next);
             }
         }
     }
@@ -121,7 +121,7 @@ public class myMaze{
         if(Next != null) {
             Visited_Stack.push(Next);
             Count_Visited++;
-            Next.visited = true;
+            Next.Visited = true;
             wallBreaker(current, Next);
             current = Next;
         }
@@ -152,8 +152,8 @@ public class myMaze{
 
         if(Next != End && Next != null) {
             Visited_Queue.offer(Next);
-            Next.visitedPath = true;
-            Next.visited = true;
+            Next.Visited_Path = true;
+            Next.Visited = true;
             Next.drawPath(g, Color.ORANGE);
         }else {
             if(!Visited_Queue.isEmpty())
@@ -177,13 +177,13 @@ public class myMaze{
         }
 
         if(Next != End && Next != null) {
-            visitedS.push(Next);
-            Next.visitedPath = true;
-            Next.visited = true;
+            VisitedS.push(Next);
+            Next.Visited_Path = true;
+            Next.Visited = true;
             Next.drawPath(g, Color.ORANGE);
         }else {
-            if(!visitedS.isEmpty()) {
-                current = visitedS.pop();
+            if(!VisitedS.isEmpty()) {
+                current = VisitedS.pop();
             }
             else {
                 return;
@@ -194,17 +194,17 @@ public class myMaze{
 
     private void Path_Start_End() {
         Paths_From_A_to_B.add(End);
-        cells tempParent = End.parent;
+        cells tempParent = End.Parent;
         while(tempParent != Start) {
             Paths_From_A_to_B.add(tempParent);
-            tempParent = tempParent.parent;
+            tempParent = tempParent.Parent;
         }
     }
 
 
     private void AtoB(cells A,cells B) {
         if(B!=null) {
-            B.parent = A;
+            B.Parent = A;
         }
         if(A!=null)
             A.Next.add(B);
@@ -214,24 +214,24 @@ public class myMaze{
     public void initStartAndEnd() {
 
 
-        Start = grids[new Random().NextInt(w)][new Random().NextInt(w)];
-        End = grids[new Random().NextInt(w)][new Random().NextInt(w)];
+        Start = grids[new Random().nextInt(w)][new Random().nextInt(w)];
+        End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
 
         if (Start == End){
-            End = grids[new Random().NextInt(w)][new Random().NextInt(w)];
+            End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
         }
 
         for(int i = 0;i<w;i++) {
             for(int j = 0;j<w;j++) {
-                grids[i][j].visited = false;
+                grids[i][j].Visited = false;
             }
         }
 
 
-        Start.visited = true;
-        End.visited = true;
+        Start.Visited = true;
+        End.Visited = true;
         Visited_Queue = new LinkedList<cells>();
-        visitedS = new Stack<cells>();
+        VisitedS = new Stack<cells>();
         Paths_From_A_to_B = new ArrayList<cells>();
         current = Start;
         Next = current;
@@ -243,19 +243,19 @@ public class myMaze{
     public cells getOneNeighbor(cells currentCell){
         ArrayList<cells> neighbors = new ArrayList<>();
 
-        if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].visitedPath == false && currentCell.Walls[0] == false) {
+        if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited_Path == false && currentCell.Walls[0] == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
 
-        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].visitedPath == false && currentCell.Walls[1] == false) {
+        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited_Path == false && currentCell.Walls[1] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
 
-        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].visitedPath == false && currentCell.Walls[2] == false) {
+        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited_Path == false && currentCell.Walls[2] == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
 
-        if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].visitedPath == false && currentCell.Walls[3] == false) {
+        if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited_Path == false && currentCell.Walls[3] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
 
@@ -269,19 +269,19 @@ public class myMaze{
     public cells getOneRandomNeighbor(cells currentCell) {
         ArrayList<cells> neighbors = new ArrayList<>();
 
-        if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].visited == false) {
+        if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
 
-        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].visited == false) {
+        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
 
-        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].visited == false) {
+        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
 
-        if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].visited == false) {
+        if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
 
@@ -289,7 +289,7 @@ public class myMaze{
         if (neighbors.isEmpty())
             return null;
 
-        return  neighbors.get(new Random().NextInt(neighbors.size()));
+        return  neighbors.get(new Random().nextInt(neighbors.size()));
 
     }
     public boolean hasNeighbor(cells currentCell) {

@@ -2,14 +2,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	
 	private final int Maze_Size = 600;
-	private int Cell_Size = 40;
+	private int Cell_Size = 100;
 	private int Slowest_Delay = 110;
 	private int delay = 10;
 	private int Window_W,Window_H;
@@ -34,7 +33,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	
 	private JCheckBox Maze_CheckBox;
 	
-	private JCheckBox BFS_CheckBox;
 	private JComboBox algoBox;
 	private int mode ;
 	private JLabel algoBox_Label;
@@ -93,7 +91,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 
 		Cell_Label = new JLabel();
-		Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+		Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 		Cell_Label.setBounds(30, 130, 250, 20);
 		Cell_Label.setFont(new Font("MV Boli",Font.BOLD,18));
 		
@@ -129,15 +127,15 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 	
 		Small_Panel.add(Maze_CheckBox);
 		
-		/*
-		//Check box
-		BFS_CheckBox = new JCheckBox();
-		BFS_CheckBox.setBounds(Small_Panel.getSize().width/2-30, 285, 250, 30);
-		BFS_CheckBox.setText("Breadth First Search");
-		BFS_CheckBox.setFont(new Font("",Font.BOLD,15));
-		BFS_CheckBox.setFocusable(false);
-		Small_Panel.add(BFS_CheckBox);
-		*/
+		
+		
+		// BFS_CheckBox = new JCheckBox();
+		// BFS_CheckBox.setBounds(Small_Panel.getSize().width/2-30, 285, 250, 30);
+		// BFS_CheckBox.setText("Breadth First Search");
+		// BFS_CheckBox.setFont(new Font("",Font.BOLD,15));
+		// BFS_CheckBox.setFocusable(false);
+		// Small_Panel.add(BFS_CheckBox);
+		
 		
 		
 		
@@ -252,7 +250,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		if(e.getSource()==DifficultyBox) {
 			if(DifficultyBox.getSelectedIndex()==0) {
 				Maze_CheckBox.setEnabled(true);
-				Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+				Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 				Cell_Size = 100;
 				Start_Button.setText("Start");
 				flag = true;
@@ -261,7 +259,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			else if(DifficultyBox.getSelectedIndex()==1) {
 				Maze_CheckBox.setEnabled(true);
-				Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+				Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 				Cell_Size = 70;
 				Start_Button.setText("Start");
 				flag = true;
@@ -269,7 +267,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 				reset();
 			}else if(DifficultyBox.getSelectedIndex()==2) {
 				Maze_CheckBox.setEnabled(true);
-				Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+				Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 				Cell_Size = 50;
 				Start_Button.setText("Start");
 				flag = true;
@@ -278,7 +276,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 			}
 			else if(DifficultyBox.getSelectedIndex()==3) {
 				Maze_CheckBox.setEnabled(true);
-				Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+				Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 				Cell_Size = 20;
 				Start_Button.setText("Start");
 				flag = true;
@@ -286,7 +284,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 				reset();
 			}else if(DifficultyBox.getSelectedIndex()==4) {
 				Maze_CheckBox.setEnabled(true);
-				Cell_Label.setText("Cell's size adjustment: " + DifficultyBox.getSelectedItem());
+				Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
 				Cell_Size = 5;
 				Start_Button.setText("Start");
 				flag = true;
