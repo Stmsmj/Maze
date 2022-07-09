@@ -17,6 +17,7 @@ public class myMaze{
     private cells Start,End;
     private Queue<cells> Visited_Queue;
     private Stack<cells> VisitedS;
+    private int myCode;
 
     myMaze(int mazeSize,int cellSize){
         Maze_Size = mazeSize;
@@ -69,9 +70,12 @@ public class myMaze{
     }
 
     public void drawPathFinder(Graphics g,int mode) {
-        if(mode == 0)
-            mazeFinderBFS(g);
+        if(mode==0){
+            play(g);
+            }
         else if(mode == 1)
+            mazeFinderBFS(g);
+        else if(mode == 2)
             mazeFinderDFS(g);
 
         for(cells x: Paths_From_A_to_B) {
@@ -164,6 +168,30 @@ public class myMaze{
         }
     }
 
+    public void play(Graphics g) {
+        myCode=myFrame.getCode();
+		Next = move(myCode,current);
+		if(Next!=null){
+			if(!Next.Visited_Path){
+				AtoB(current, Next);;
+			}
+		}
+		if(Next == End) {
+			finish = true;
+			Path_Start_End();;
+			return;
+		}
+		if(Next != End && Next != null) {
+			Next.drawPath(g, Color.ORANGE);
+			Next.Visited_Path = true;
+			Next.Visited=true;
+			current=Next;
+			current.Draw_Box(g,new Color(120,180,180));
+		
+		}
+	
+	}
+
 
     public void mazeFinderDFS(Graphics g) {
 
@@ -238,6 +266,31 @@ public class myMaze{
 
     }
 
+    public cells move(int keyCode,cells currentCell){
+		cells myCell=null;
+		if(keyCode==87){
+			if (currentCell.row-1 >= 0 &&  currentCell.Walls[0] == false) {
+				myCell = grids[currentCell.row-1][currentCell.col];
+			}
+	}
+		else if(keyCode==68){
+			if (currentCell.col+1 < w && currentCell.Walls[1] == false) {
+				myCell = grids[currentCell.row][currentCell.col+1];
+			}
+		}
+		else if(keyCode==83){
+			if (currentCell.row + 1 < w && currentCell.Walls[2] == false) {
+				myCell = grids[currentCell.row+1][currentCell.col];
+			}
+		}
+		else if(keyCode==65){
+			if (currentCell.col-1 >= 0 && currentCell.Walls[3] == false) {
+				myCell = grids[currentCell.row][currentCell.col-1]; 
+			}
+		}
+		return  myCell;
+		
+	}
 
 
     public cells getOneNeighbor(cells currentCell){

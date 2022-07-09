@@ -1,6 +1,11 @@
 import javax.swing.*;
-public class myFrame extends JFrame{
+import java.awt.event.*;
+import javax.swing.event.*;
+
+
+public class myFrame extends JFrame implements KeyListener{
 	public myPanel panel;
+	private static int code;
 
 	public final int Window_Width = 1000;
 	public final int Window_Height = 600;
@@ -10,6 +15,8 @@ public class myFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(Window_Width, Window_Height);
 		this.setResizable(false);
+		addKeyListener(this);
+		this.setFocusable(true);
 		panel = new myPanel(Window_Width,Window_Height);
 		this.add(panel);
 		this.pack();
@@ -17,6 +24,21 @@ public class myFrame extends JFrame{
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 	
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e){}
+	@Override
+	public void keyPressed(KeyEvent e){
+		code=e.getKeyCode();
+	}
+	@Override
+	public void keyReleased(KeyEvent e){	
+		code=1;
+	}
+
+	public static int getCode(){
+		return code; 	
 	}
 
 }

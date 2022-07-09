@@ -134,7 +134,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		
 		
 		
-		String[] algoList = {"Breadth First Search(BFS)","Depth First Search(DFS)"};
+		String[] algoList = {"play","Breadth First Search(BFS)","Depth First Search(DFS)"};
 		algoBox = new JComboBox<String>(algoList);
 		algoBox.setBounds(Small_Panel.getSize().width/2-160, 470, 280, 30);
 		algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
@@ -219,6 +219,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 				Start_Solving_Button.setEnabled(false);
 				Reset_Button.setEnabled(true);
 				reMaze_Button.setEnabled(true);
+				Speed_Slider.setEnabled(true);
 				
 				tm.stop();
 			}
@@ -500,6 +501,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 				DifficultyBox.addItem("لول خدایان");
 				algoBox.removeItemAt(0);
 				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("بازی");
 				algoBox.addItem("جستجوی سطح اول(BFS)");
 				algoBox.addItem("جستجوی عمقی اول(DFS)");
 
@@ -531,6 +534,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 			flag = true;
 			Maze_CheckBox.setEnabled(true);
 			reMaze_Button.setEnabled(false);
+			Speed_Slider.setEnabled(true);
 			initMaze();
 			reset();
 			if (Language_box.getSelectedIndex()==0){
@@ -608,7 +612,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 		if(e.getSource() == Start_Solving_Button) {
 			Maze_CheckBox.setSelected(false);
 			Maze_CheckBox.setEnabled(false);
+			Speed_Slider.setEnabled(false);
 			algoBox.setEnabled(false);
+			if(mode==0){
+				tm.setDelay(150);
+			}
 			
 			
 			
