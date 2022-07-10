@@ -1,3 +1,5 @@
+package AliHube.com;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,7 +40,7 @@ public class cells {
     public void Draw_Cell(Graphics g) {
         Graphics2D G2D = (Graphics2D) g;
 
-        G2D.setColor(new Color(169,169,169));
+        G2D.setColor(new Color(128,128,128));
         G2D.setStroke(new BasicStroke(Stroke_Size));
 
         if(Walls[0] == true)
