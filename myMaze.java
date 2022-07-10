@@ -1,3 +1,4 @@
+package com.company;
 import java.awt.*;
 import java.util.*;
 
@@ -17,7 +18,6 @@ public class myMaze{
     private cells Start,End;
     private Queue<cells> Visited_Queue;
     private Stack<cells> VisitedS;
-    private int myCode;
 
     myMaze(int mazeSize,int cellSize){
         Maze_Size = mazeSize;
@@ -51,7 +51,7 @@ public class myMaze{
     public void drawMaze(Graphics g) {
         for(int i = 0;i<w;i++) {
             for(int j = 0;j<w;j++) {
-                grids[i][j].Draw_Box(g, new Color(110,206,200,250));
+                grids[i][j].Draw_Box(g, new Color(100,50,200,190));
                 grids[i][j].Draw_Cell(g);
             }
         }
@@ -70,20 +70,17 @@ public class myMaze{
     }
 
     public void drawPathFinder(Graphics g,int mode) {
-        if(mode==0){
-            play(g);
-        }
-        else if(mode == 1)
+        if(mode == 0)
             mazeFinderBFS(g);
-        else if(mode == 2)
+        else if(mode == 1)
             mazeFinderDFS(g);
 
         for(cells x: Paths_From_A_to_B) {
-            x.drawPath(g, Color.WHITE);
+            x.drawPath(g, Color.RED);
         }
 
-        Start.Draw_Box(g,new Color(0, 250, 0));
-        End.Draw_Box(g,new Color(250, 0, 0));
+        Start.Draw_Box(g,new Color(0, 0, 250));
+        End.Draw_Box(g,new Color(0, 250, 0));
 
 
         for(int i = 0;i<w;i++) {
@@ -168,30 +165,6 @@ public class myMaze{
         }
     }
 
-    public void play(Graphics g) {
-        myCode=myFrame.getCode();
-        Next = move(myCode,current);
-        if(Next!=null){
-            if(!Next.Visited_Path){
-                AtoB(current, Next);;
-            }
-        }
-        if(Next == End) {
-            finish = true;
-            Path_Start_End();;
-            return;
-        }
-        if(Next != End && Next != null) {
-            Next.drawPath(g, Color.ORANGE);
-            Next.Visited_Path = true;
-            Next.Visited=true;
-            current=Next;
-            current.Draw_Box(g,new Color(120,180,180));
-
-        }
-
-    }
-
 
     public void mazeFinderDFS(Graphics g) {
 
@@ -266,31 +239,6 @@ public class myMaze{
 
     }
 
-    public cells move(int keyCode,cells currentCell){
-        cells myCell=null;
-        if(keyCode==87){
-            if (currentCell.row-1 >= 0 &&  currentCell.Walls[0] == false) {
-                myCell = grids[currentCell.row-1][currentCell.col];
-            }
-        }
-        else if(keyCode==68){
-            if (currentCell.col+1 < w && currentCell.Walls[1] == false) {
-                myCell = grids[currentCell.row][currentCell.col+1];
-            }
-        }
-        else if(keyCode==83){
-            if (currentCell.row + 1 < w && currentCell.Walls[2] == false) {
-                myCell = grids[currentCell.row+1][currentCell.col];
-            }
-        }
-        else if(keyCode==65){
-            if (currentCell.col-1 >= 0 && currentCell.Walls[3] == false) {
-                myCell = grids[currentCell.row][currentCell.col-1];
-            }
-        }
-        return  myCell;
-
-    }
 
 
     public cells getOneNeighbor(cells currentCell){
@@ -384,7 +332,7 @@ public class myMaze{
     }
 
     public void setCellSize(int cellSize) {
-        Cell_Size = cellSize;
+        Cell_Size = cellSize + 400;
     }
 
 
