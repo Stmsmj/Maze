@@ -1,5 +1,4 @@
-package AliHube.com;
-
+package com.company;
 import java.awt.*;
 import java.util.*;
 
@@ -72,13 +71,13 @@ public class myMaze{
     }
 
     public void drawPathFinder(Graphics g,int mode) {
-        if(mode==0){
+        if(mode == 0)
             play(g);
-        }
         else if(mode == 1)
             mazeFinderBFS(g);
-        else if(mode == 2)
+        else if(mode == 2){
             mazeFinderDFS(g);
+        }
 
         for(cells x: Paths_From_A_to_B) {
             x.drawPath(g, Color.WHITE);
@@ -116,8 +115,6 @@ public class myMaze{
             }
         }
     }
-
-
 
     public void update() {
         if (running == false)
@@ -169,7 +166,6 @@ public class myMaze{
             }
         }
     }
-
     public void play(Graphics g) {
         myCode=myFrame.getCode();
         Next = move(myCode,current);
@@ -193,8 +189,6 @@ public class myMaze{
         }
 
     }
-
-
     public void mazeFinderDFS(Graphics g) {
 
         Next = getOneNeighbor(current);
@@ -221,7 +215,6 @@ public class myMaze{
         }
     }
 
-
     private void Path_Start_End() {
         Paths_From_A_to_B.add(End);
         cells tempParent = End.Parent;
@@ -240,9 +233,7 @@ public class myMaze{
             A.Next.add(B);
     }
 
-
     public void initStartAndEnd() {
-
 
         Start = grids[new Random().nextInt(w)][new Random().nextInt(w)];
         End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
@@ -267,7 +258,6 @@ public class myMaze{
         Next = current;
 
     }
-
     public cells move(int keyCode,cells currentCell){
         cells myCell=null;
         if(keyCode==87){
@@ -293,60 +283,44 @@ public class myMaze{
         return  myCell;
 
     }
-
-
     public cells getOneNeighbor(cells currentCell){
         ArrayList<cells> neighbors = new ArrayList<>();
-
         if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited_Path == false && currentCell.Walls[0] == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
-
         if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited_Path == false && currentCell.Walls[1] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
-
         if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited_Path == false && currentCell.Walls[2] == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
-
         if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited_Path == false && currentCell.Walls[3] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
-
-
         if (neighbors.isEmpty())
             return null;
-
         return  neighbors.get(0);
     }
 
     public cells getOneRandomNeighbor(cells currentCell) {
         ArrayList<cells> neighbors = new ArrayList<>();
-
         if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
-
         if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
-
         if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
-
         if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
-
-
         if (neighbors.isEmpty())
             return null;
-
         return  neighbors.get(new Random().nextInt(neighbors.size()));
-
     }
+
     public boolean hasNeighbor(cells currentCell) {
         if (getOneRandomNeighbor(currentCell)!=null)
             return true;
@@ -386,7 +360,7 @@ public class myMaze{
     }
 
     public void setCellSize(int cellSize) {
-        Cell_Size = cellSize;
+        Cell_Size = cellSize + 300;
     }
 
 
