@@ -1,4 +1,3 @@
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -7,7 +6,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 public class cells {
-
+    
     public int row,r,col,c,Cell_Size;
     public boolean[] Walls = {true,true,true,true};
     public ArrayList<cells> Next;
@@ -21,7 +20,7 @@ public class cells {
         this.row = row;
         this.col = col;
         r = row*Cell_Size;
-        c = col*Cell_Size +300;
+        c = col*Cell_Size;
         this.Cell_Size = Cell_Size;
         Next = new ArrayList<cells>();
         Parent = null;
