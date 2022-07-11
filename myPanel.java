@@ -1,4 +1,4 @@
-
+package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,15 +44,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         this.setBackground(new Color(0,0,0));
         this.setLayout(null);
 
-
-
         Small_Panel = new JPanel();
         Small_Panel.setPreferredSize(new Dimension((Window_W-Maze_Size),Window_H));
-        Small_Panel.setBounds(Maze_Size+400, 0, Window_W-Maze_Size-200, Window_H);
+        Small_Panel.setBounds(Maze_Size+350, 0, Window_W-Maze_Size-200, Window_H);
         Small_Panel.setLayout(null);
         this.add(Small_Panel);
-
-
 
         Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)+30-100, 120, 160, 50,new Color(102,80 ,153));
         Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
@@ -162,7 +158,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Reset_Button.addActionListener(this);
 
         panel2 = new JPanel();
-        panel2.setBounds(0,0,395,600);
+        panel2.setBounds(0,0,345,600);
         panel2.setBackground(Color.WHITE);
         this.add(panel2);
 

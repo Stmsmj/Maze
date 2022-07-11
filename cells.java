@@ -1,4 +1,4 @@
-
+package com.company;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,7 +21,7 @@ public class cells {
         this.row = row;
         this.col = col;
         r = row*Cell_Size;
-        c = col*Cell_Size +400;
+        c = col*Cell_Size +350;
         this.Cell_Size = Cell_Size;
         Next = new ArrayList<cells>();
         Parent = null;
