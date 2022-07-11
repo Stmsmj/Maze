@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.util.*;
 
@@ -60,7 +59,7 @@ public class myMaze{
     public void mazeAlgorithm(Graphics g) {
         if(running) {
             if(Count_Visited<=w*w)
-                current.Draw_Box(g,new Color(0,255,100,100));
+                current.Draw_Box(g,new Color(0,255,0,100));
             update();
             System.out.println(Count_Visited);
         }
@@ -75,7 +74,7 @@ public class myMaze{
             play(g);
         else if(mode == 1)
             mazeFinderBFS(g);
-        else if(mode == 2){
+        else if(mode==2){
             mazeFinderDFS(g);
         }
 
@@ -83,8 +82,8 @@ public class myMaze{
             x.drawPath(g, Color.WHITE);
         }
 
-        Start.Draw_Box(g,new Color(250, 250, 250));
-        End.Draw_Box(g,new Color(0, 0, 0));
+        Start.Draw_Box(g,new Color(0, 250, 0));
+        End.Draw_Box(g,new Color(250, 0, 0));
 
 
         for(int i = 0;i<w;i++) {
@@ -180,9 +179,16 @@ public class myMaze{
             return;
         }
         if(Next != End && Next != null) {
+            if(!Paths_From_A_to_B.contains(Next) && Next!=Start && current!=Start){
+				Paths_From_A_to_B.add(current);
+				Paths_From_A_to_B.add(Next);
+				}
+				else{
+					Paths_From_A_to_B.remove(current);
+					Paths_From_A_to_B.remove(Next);
+				}
             Next.drawPath(g, Color.ORANGE);
             Next.Visited_Path = true;
-            Next.Visited=true;
             current=Next;
             current.Draw_Box(g,new Color(120,180,180));
 
@@ -247,6 +253,8 @@ public class myMaze{
                 grids[i][j].Visited = false;
             }
         }
+
+
         Start.Visited = true;
         End.Visited = true;
         Visited_Queue = new LinkedList<cells>();
@@ -358,7 +366,7 @@ public class myMaze{
     }
 
     public void setCellSize(int cellSize) {
-        Cell_Size = cellSize + 300;
+        Cell_Size = cellSize + 400;
     }
 
 
