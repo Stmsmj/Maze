@@ -182,9 +182,16 @@ public class myMaze{
             return;
         }
         if(Next != End && Next != null) {
+            if(!Paths_From_A_to_B.contains(Next) && Next!=Start && current!=Start){
+				Paths_From_A_to_B.add(current);
+				Paths_From_A_to_B.add(Next);
+				}
+				else{
+					Paths_From_A_to_B.remove(current);
+					Paths_From_A_to_B.remove(Next);
+				}
             Next.drawPath(g, Color.ORANGE);
             Next.Visited_Path = true;
-            Next.Visited=true;
             current=Next;
             current.Draw_Box(g,new Color(120,180,180));
 
