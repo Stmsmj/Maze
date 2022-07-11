@@ -1,4 +1,5 @@
-package com.company;
+package AliHube.com;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -6,8 +7,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
+
 public class cells {
-    // باید بدم به نگارشی کل اینو بدون تغییر
+
+
+
+
+
     public int row,r,col,c,Cell_Size;
     public boolean[] Walls = {true,true,true,true};
     public ArrayList<cells> Next;
@@ -17,21 +23,24 @@ public class cells {
     private int Font_Weight;
     private int Stroke_Size;
     public boolean Visited_Path = false;
+
+
     cells(int row,int col,int Cell_Size){
         this.row = row;
         this.col = col;
         r = row*Cell_Size;
-        c = col*Cell_Size + 400;
+        c = col*Cell_Size;
         this.Cell_Size = Cell_Size;
         Next = new ArrayList<cells>();
         Parent = null;
         Font_Weight = (int)(10+0.3*(Cell_Size-20));
         Stroke_Size = (int)((5.0/9 * ((Cell_Size/10)-1) )+1);
+
     }
     public void Draw_Cell(Graphics g) {
         Graphics2D G2D = (Graphics2D) g;
 
-        G2D.setColor(new Color(0,0,0));
+        G2D.setColor(new Color(128,128,128));
         G2D.setStroke(new BasicStroke(Stroke_Size));
 
         if(Walls[0] == true)
