@@ -1,12 +1,11 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 public class myPanel extends JPanel implements ActionListener,ChangeListener{
-
     private final int Maze_Size = 600;
     private int Cell_Size = 100;
     private int Slowest_Delay = 110;
@@ -14,39 +13,26 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
     private int Window_W,Window_H;
     private int running = -1;
     String[] Difficulties;
-
     private int Switch_Case_Var = 0;
-
     private myMaze maze;
     private Timer tm;
-
-
     private JPanel Small_Panel;
     private myButton Start_Button;
     private myButton Reset_Button;
     private myButton reMaze_Button;
-
     private JLabel Cell_Label;
     private JComboBox DifficultyBox;
     private JComboBox Language_box;
     private JLabel Language_label;
-
     private JLabel Speed_Label;
     private JSlider Speed_Slider;
-
     private JCheckBox Maze_CheckBox;
-
     private JComboBox algoBox;
     private int mode;
     private JLabel algoBox_Label;
-
-
     private myButton Start_Solving_Button;
     private boolean flag = true;
-
-
-
-
+    private JPanel panel2;
     myPanel(int Window_W,int Window_H){
         this.Window_W = Window_W;
         this.Window_H = Window_H;
@@ -175,7 +161,10 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.add(Reset_Button);
         Reset_Button.addActionListener(this);
 
-
+        panel2 = new JPanel();
+        panel2.setBounds(0,0,395,600);
+        panel2.setBackground(Color.WHITE);
+        this.add(panel2);
 
         initMaze();
         tm.start();
@@ -833,9 +822,5 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
     }
-
-
-
-
 
 }
