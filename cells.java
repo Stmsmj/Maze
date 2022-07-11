@@ -7,7 +7,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 public class cells {
-    // باید بدم به نگارشی کل اینو بدون تغییر
+     
     public int row,r,col,c,Cell_Size;
     public boolean[] Walls = {true,true,true,true};
     public ArrayList<cells> Next;
