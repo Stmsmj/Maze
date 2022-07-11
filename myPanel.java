@@ -1,11 +1,12 @@
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 public class myPanel extends JPanel implements ActionListener,ChangeListener{
+
     private final int Maze_Size = 600;
     private int Cell_Size = 100;
     private int Slowest_Delay = 110;
@@ -13,48 +14,69 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
     private int Window_W,Window_H;
     private int running = -1;
     String[] Difficulties;
+
     private int Switch_Case_Var = 0;
+
     private myMaze maze;
     private Timer tm;
+
+
     private JPanel Small_Panel;
     private myButton Start_Button;
     private myButton Reset_Button;
     private myButton reMaze_Button;
+
     private JLabel Cell_Label;
     private JComboBox DifficultyBox;
     private JComboBox Language_box;
     private JLabel Language_label;
+
     private JLabel Speed_Label;
     private JSlider Speed_Slider;
+
     private JCheckBox Maze_CheckBox;
+
     private JComboBox algoBox;
     private int mode;
     private JLabel algoBox_Label;
+
+
     private myButton Start_Solving_Button;
     private boolean flag = true;
-    private JPanel panel2;
+
+
+
+
     myPanel(int Window_W,int Window_H){
         this.Window_W = Window_W;
         this.Window_H = Window_H;
+
         tm = new Timer(delay,this);
+
         this.setPreferredSize(new Dimension(Window_W,Window_H));
         this.setBounds(0, 0, Window_W, Window_H);
-        this.setBackground(new Color(50,50,50));
+        this.setBackground(new Color(0,0,0));
         this.setLayout(null);
+
+
 
         Small_Panel = new JPanel();
         Small_Panel.setPreferredSize(new Dimension((Window_W-Maze_Size),Window_H));
-        Small_Panel.setBounds(Maze_Size+300, 0, Window_W-Maze_Size-200, Window_H);
+        Small_Panel.setBounds(Maze_Size, 0, Window_W-Maze_Size, Window_H);
         Small_Panel.setLayout(null);
         this.add(Small_Panel);
 
-        Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)-130-20-100, 190, 160, 60,new Color(100,149 ,237));
+
+
+        Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)+30, 120, 160, 50,new Color(102,80 ,153));
         Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Start_Button);
         Start_Button.addActionListener(this);
 
 
-        reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+20-100, 190, 160, 60,new Color(240,128,128));
+
+
+        reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+30, 60, 160, 50,Color.CYAN);
         reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(reMaze_Button);
         reMaze_Button.addActionListener(this);
@@ -68,6 +90,10 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         DifficultyBox.setFocusable(false);
         DifficultyBox.addActionListener(this);
 
+
+
+
+
         Cell_Label = new JLabel();
         Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
         Cell_Label.setBounds(30, 100, 250, 20);
@@ -79,7 +105,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         Speed_Slider = new JSlider(1,6,3);
-        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2)-200, 290, 350, 40);
+        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 230, 350, 40);
         Speed_Slider.setPaintTrack(true);
         Speed_Slider.setMajorTickSpacing(1);
         Speed_Slider.setSnapToTicks(true);
@@ -88,8 +114,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         Speed_Label = new JLabel();
         Speed_Label.setText("Speed: " + Speed_Slider.getValue());
-        Speed_Label.setBounds(30, 270, 220, 20);
-        Speed_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+        Speed_Label.setBounds(30, 210, 220, 20);
+        Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
 
         Small_Panel.add(Speed_Label);
         Small_Panel.add(Speed_Slider);
@@ -102,53 +128,59 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.add(Maze_CheckBox);
 
         algoBox_Label = new JLabel("Pathfinding Algorithms");
-        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155-100, 480, 280, 30);
+        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 440, 280, 30);
         algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(algoBox_Label);
 
+
+
         String[] algoList = {"play","Breadth First Search(BFS)","Depth First Search(DFS)"};
         algoBox = new JComboBox<String>(algoList);
-        algoBox.setBounds(Small_Panel.getSize().width/2-160-100, 520, 280, 30);
+        algoBox.setBounds(Small_Panel.getSize().width/2-160, 470, 280, 30);
         algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
         algoBox.setFocusable(false);
         algoBox.addActionListener(this);
         mode = algoBox.getSelectedIndex();
 
+
+
         Small_Panel.add(algoBox);
 
         Language_label = new JLabel("Language:");
-        Language_label.setBounds(Small_Panel.getSize().width/2-155-100, 420, 220, 30);
+        Language_label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
         Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Language_label);
 
+
+
         String[] Language_list = {"English","Français","Deutsch","日本","Español","Russian","فارسی"};
         Language_box = new JComboBox<String>(Language_list);
-        Language_box.setBounds(Small_Panel.getSize().width/2-160-100, 450, 220, 30);
+        Language_box.setBounds(Small_Panel.getSize().width/2-160, 400, 220, 30);
         Language_box.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
         Language_box.setFocusable(false);
         Language_box.addActionListener(this);
         Small_Panel.add(Language_box);
 
-        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20-100, 350, 160, 60,new Color(127, 255, 212));
+
+
+        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 300, 160, 60,new Color(20, 115, 0));
         Small_Panel.add(Start_Solving_Button);
         Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Start_Solving_Button.addActionListener(this);
         Start_Solving_Button.setEnabled(false);
 
 
-        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20-100, 350, 160, 60,new Color(112, 128, 144));
+        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 300, 160, 60,new Color(225, 120, 50));
         Reset_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Reset_Button);
         Reset_Button.addActionListener(this);
 
-        panel2 = new JPanel();
-        panel2.setBounds(0,0,295,600);
-        panel2.setBackground(Color.WHITE);
-        this.add(panel2);
+
 
         initMaze();
         tm.start();
     }
+
 
     private void initMaze() {
         maze = new myMaze(Maze_Size,Cell_Size);
@@ -172,7 +204,14 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         }
 
         super.paintComponent(g);
+
+
+
+
+
         maze.drawMaze(g);
+
+
         if(!flag) {
             maze.drawPathFinder(g,mode);
             if(maze.finish) {
@@ -192,6 +231,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         else {
             maze.drawMazeInstantly();
         }
+
+
+
+
+
     }
     private void reset() {
         tm.start();
@@ -201,8 +245,15 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         repaint();
     }
 
+
+
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
+
 
         if (e.getSource()==Language_box) {
             if (Language_box.getSelectedIndex()==3) {
@@ -782,5 +833,9 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
     }
+
+
+
+
 
 }
