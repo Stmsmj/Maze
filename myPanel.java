@@ -1,3 +1,5 @@
+package maze.h;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +45,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
     private myButton Start_Solving_Button;
     private boolean flag = true;
+    private T t;
+    private JLabel timerLabel;
 
 
 
@@ -65,6 +69,12 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.setBounds(Maze_Size, 0, Window_W-Maze_Size, Window_H);
         Small_Panel.setLayout(null);
         this.add(Small_Panel);
+
+        t = new T();
+        timerLabel =new JLabel("Time : ");
+        timerLabel.setBounds(100,500,100,100);
+        Small_Panel.add(timerLabel);
+        t.setLabel(timerLabel);
 
 
 
@@ -222,6 +232,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Speed_Slider.setEnabled(true);
 
                 tm.stop();
+                t.pause();
             }
         }
 
@@ -559,6 +570,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         if (e.getSource()==Start_Button) {
+            //t.start();
             DifficultyBox.setEnabled(false);
             running *= -1;
             if(running == 1){
@@ -610,6 +622,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         if(e.getSource() == Start_Solving_Button) {
+            t.start();
             Maze_CheckBox.setSelected(false);
             Maze_CheckBox.setEnabled(false);
             Speed_Slider.setEnabled(false);
