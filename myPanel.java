@@ -1,268 +1,833 @@
-package com.company;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 public class myPanel extends JPanel implements ActionListener,ChangeListener{
-    private final int mazeSize = 600;
-    private int cellSize = 40;
-    private int slowestDelay = 110;
-    private int delay = 10;
-    private int windowW,windowH;
-    private int running = -1;
-    public int code;
-    private int switchCaseVar = 0;
-    private myMaze maze;
-    private Timer tm;
-    private JPanel smallPanel;
-    private myButton startButton;
-    private myButton resetButton;
-    private myButton reMazeButton;
-    private JLabel cellLabel;
-    private JSlider cellSlider;
-    private JLabel speedLabel;
-    private JSlider speedSlider;
-    private JCheckBox mazeCheckbox;
-    private JCheckBox BFSCheckbox;
-    private JComboBox algoBox;
-    private int mode ;
-    private JLabel algoBoxLabel;
-    private myButton startSolvingButton;
-    private boolean flag = true;
-    private JPanel panel2;
-    myPanel(int windowW,int windowH){
-        this.windowW = windowW;
-        this.windowH = windowH;
-        tm = new Timer(delay,this);
-        this.setPreferredSize(new Dimension(windowW,windowH));
-        this.setBounds(200, 0, windowW, windowH);
-        this.setBackground(new Color(250,250,250));
-        this.setLayout(null);
-        //cái bảng bên phải
-        smallPanel = new JPanel();
-        smallPanel.setPreferredSize(new Dimension((windowW-mazeSize)+200,windowH));
-        smallPanel.setBounds(mazeSize+400, 0, windowW-mazeSize-300, windowH);
-        smallPanel.setLayout(null);
-        this.add(smallPanel);
-        //nút start
-        startButton = new myButton("Start",(int)(smallPanel.getSize().width/2)-120-30-50, 30, 120, 50,Color.PINK);
-        smallPanel.add(startButton);
-        startButton.addActionListener(this);
-        //nút re-maze
-        reMazeButton = new myButton("Re-Maze",(int)(smallPanel.getSize().width/2)+30-50, 30, 120, 50,Color.CYAN);
-        smallPanel.add(reMazeButton);
-        reMazeButton.addActionListener(this);
-        reMazeButton.setEnabled(false);
-        //Bảng lựa chọn cellSlider + Label của nó
-        cellSlider = new JSlider(10,100,40);
-        cellSlider.setBounds((windowW-mazeSize)/2-(350/2)-200, 150, 350, 50);
-        cellSlider.setPaintTicks(true);
-        cellSlider.setMinorTickSpacing(5);
-        cellSlider.setPaintTrack(true);
-        cellSlider.setMajorTickSpacing(10);
-        cellSlider.setSnapToTicks(true);
-        cellSlider.setPaintLabels(true);
-        cellSlider.addChangeListener(this);
-        cellLabel = new JLabel();
-        cellLabel.setText("Cell's size adjustment: " + cellSlider.getValue());
-        cellLabel.setBounds(130-100, 130, 250, 20);
-        cellLabel.setFont(new Font("",Font.BOLD,18));
-        smallPanel.add(cellLabel);
-        smallPanel.add(cellSlider);
-        //Bảng lựa chọn speed va label cua no
-        speedSlider = new JSlider(1,5,5);
-        speedSlider.setBounds((windowW-mazeSize)/2-(350/2)-200, 230, 350, 40);
-        speedSlider.setPaintTrack(true);
-        speedSlider.setMajorTickSpacing(1);
-        speedSlider.setSnapToTicks(true);
-        speedSlider.setPaintLabels(true);
-        speedSlider.addChangeListener(this);
+	
+	private final int Maze_Size = 600;
+	private int Cell_Size = 100;
+	private int Slowest_Delay = 110;
+	private int delay = 10;
+	private int Window_W,Window_H;
+	private int running = -1;
+	String[] Difficulties;
 
-        speedLabel = new JLabel();
-        speedLabel.setText("Speed: " + speedSlider.getValue());
-        speedLabel.setBounds(130-100, 210, 180, 20);
-        speedLabel.setFont(new Font("",Font.BOLD,18));
-
-        smallPanel.add(speedLabel);
-        smallPanel.add(speedSlider);
-        //generate Check box
-        mazeCheckbox = new JCheckBox();
-        mazeCheckbox.setBounds((int)(smallPanel.getSize().width/2)-120-30-50, 95, 250, 20);
-        mazeCheckbox.setText("Generate instantly");
-        mazeCheckbox.setFont(new Font("",Font.BOLD,15));
-        mazeCheckbox.setFocusable(false);
-
-        smallPanel.add(mazeCheckbox);
-
-		//Check box
-		/*BFSCheckbox = new JCheckBox();
-		BFSCheckbox.setBounds(smallPanel.getSize().width/2-30, 285, 250, 30);
-		BFSCheckbox.setText("Breadth First Search");
-		BFSCheckbox.setFont(new Font("",Font.BOLD,15));
-		BFSCheckbox.setFocusable(false);
-		smallPanel.add(BFSCheckbox);*/
-
-        algoBoxLabel = new JLabel("Pathfinding Algorithms");
-        algoBoxLabel.setBounds(smallPanel.getSize().width/2-155-50, 370, 220, 30);
-        algoBoxLabel.setFont(new Font("",Font.BOLD,15));
-        smallPanel.add(algoBoxLabel);
-
-        // malle man
-        String[] algoList = {"Breadth First Search(BFS)","Depth First Search(DFS)","Play"};// (0 == BFS , 1 = DFS)
-        algoBox = new JComboBox(algoList);
-        algoBox.setBounds(smallPanel.getSize().width/2-160-50, 400, 220, 30);
-        algoBox.setFont(new Font("",Font.BOLD,15));
-        algoBox.setFocusable(false);
-        algoBox.addActionListener(this);
-        //algoBox.setEnabled(false);
-        mode = algoBox.getSelectedIndex(); // (0 == BFS , 1 = DFS)
-        smallPanel.add(algoBox);
-
-        //BFS button
-        startSolvingButton = new myButton("Start",smallPanel.getSize().width/2-130-20-50, 300, 130, 60,new Color(255, 231, 122));
-        smallPanel.add(startSolvingButton);
-        startSolvingButton.addActionListener(this);
-        startSolvingButton.setEnabled(false);
-
-        //nút resetMaze
-        resetButton = new myButton("Reset Maze",smallPanel.getSize().width/2+20-50, 300, 130, 60,new Color(44, 95, 45));
-        smallPanel.add(resetButton);
-        resetButton.addActionListener(this);
-
-        initMaze();
-        tm.start();
-        panel2 = new JPanel();
-        panel2.setBounds(0,0,395,600);
-        panel2.setBackground(Color.red);
-        this.add(panel2);
-
-    }
-    private void initMaze() {
-        maze = new myMaze(mazeSize,cellSize);
-    }
-
-    public void paintComponent(Graphics g) {
-
-        if(maze.checkFinished()) {
-            reMazeButton.setEnabled(true);
-            startSolvingButton.setEnabled(true);
-            algoBox.setEnabled(true);
-        }else {
-            startSolvingButton.setEnabled(false);
-            resetButton.setEnabled(false);
-            algoBox.setEnabled(false);
-        }
-
-        super.paintComponent(g);
-
-        maze.drawMaze(g);
-        if(!flag) {
-            maze.drawPathFinder(g,mode);
-            if(maze.finish) {
-                mazeCheckbox.setEnabled(true);
-                startSolvingButton.setEnabled(true);
-                resetButton.setEnabled(true);
-                tm.stop();
-            }
-        }
-
-        if(!mazeCheckbox.isSelected()) {
-            maze.mazeAlgorithm(g);
-        }
-        else {
-            maze.drawMazeInstantly();
-        }
-
-    }
-    private void reset() {
-        tm.start();
-        running = -1;
-        startButton.setEnabled(true);
-        repaint();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        //nhan nut re-maze, tạo lại maze mới
-        if(e.getSource()==reMazeButton) {
-            flag = true;
-            mazeCheckbox.setEnabled(true);
-            initMaze();
-            reset();
-            startButton.setText("Start");
-        }
+	private int Switch_Case_Var = 0;
+	
+	private myMaze maze;
+	private Timer tm;
+	
+	
+	private JPanel Small_Panel;
+	private myButton Start_Button;
+	private myButton Reset_Button;
+	private myButton reMaze_Button;
+	
+	private JLabel Cell_Label;
+	private JComboBox DifficultyBox;
+	private JComboBox Language_box;
+	private JLabel Language_label;
+	
+	private JLabel Speed_Label;
+	private JSlider Speed_Slider;
+	
+	private JCheckBox Maze_CheckBox;
+	
+	private JComboBox algoBox;
+	private int mode;
+	private JLabel algoBox_Label;
+	
+	
+	private myButton Start_Solving_Button;
+	private boolean flag = true;
 
 
+	
+	
+	myPanel(int Window_W,int Window_H){
+		this.Window_W = Window_W;
+		this.Window_H = Window_H;
+		
+		tm = new Timer(delay,this);
+		
+		this.setPreferredSize(new Dimension(Window_W,Window_H));
+		this.setBounds(0, 0, Window_W, Window_H);
+		this.setBackground(new Color(250,250,250));
+		this.setLayout(null);
+		
+		
+		
+		Small_Panel = new JPanel();
+		Small_Panel.setPreferredSize(new Dimension((Window_W-Maze_Size),Window_H));
+		Small_Panel.setBounds(Maze_Size, 0, Window_W-Maze_Size, Window_H);
+		Small_Panel.setLayout(null);
+		this.add(Small_Panel);
+		
+		
+		
+		Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)+30, 120, 160, 50,new Color(102,80 ,153));
+		Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(Start_Button);
+		Start_Button.addActionListener(this);
+		
+		
+		
+		
+		reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+30, 60, 160, 50,Color.CYAN);
+		reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(reMaze_Button);
+		reMaze_Button.addActionListener(this);
+		reMaze_Button.setEnabled(false);
+		
+		Difficulties=new String[] {"kids","medium","hard","legends","god mode"};
+		
+		DifficultyBox= new JComboBox<String>(Difficulties);
+		DifficultyBox.setBounds(30, 120, 150, 50);
+		DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+		DifficultyBox.setFocusable(false);
+		DifficultyBox.addActionListener(this);
+		
+		
+		
+		
 
-        //nhấn nút start
-        if (e.getSource()==startButton) {
-            running *= -1;
-            if(running == 1)
-                startButton.setText("Pause");
-            else
-                startButton.setText("Start");
-        }
+		Cell_Label = new JLabel();
+		Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+		Cell_Label.setBounds(30, 100, 250, 20);
+		Cell_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+		
+		Small_Panel.add(Cell_Label);
+		Small_Panel.add(DifficultyBox);
+		
+		
+		
+		Speed_Slider = new JSlider(1,6,3);
+		Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 230, 350, 40);
+		Speed_Slider.setPaintTrack(true);
+		Speed_Slider.setMajorTickSpacing(1);
+		Speed_Slider.setSnapToTicks(true);
+		Speed_Slider.setPaintLabels(true);
+		Speed_Slider.addChangeListener(this);
 
-        if(e.getSource()==algoBox) {
-            mode = algoBox.getSelectedIndex();
-        }
-        //start của bên thuật toán tìm đường
-        if(e.getSource() == startSolvingButton) {
-            mazeCheckbox.setSelected(false);
-            mazeCheckbox.setEnabled(false);
+		Speed_Label = new JLabel();
+		Speed_Label.setText("Speed: " + Speed_Slider.getValue());
+		Speed_Label.setBounds(30, 210, 220, 20);
+		Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+				
+		Small_Panel.add(Speed_Label);
+		Small_Panel.add(Speed_Slider);
+		
+		Maze_CheckBox = new JCheckBox();
+		Maze_CheckBox.setBounds((int)30, 60, 200, 20);
+		Maze_CheckBox.setText("Generate instantly");
+		Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
+		Maze_CheckBox.setFocusable(false);
+		Small_Panel.add(Maze_CheckBox);
+		
+		algoBox_Label = new JLabel("Pathfinding Algorithms");
+		algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 440, 280, 30);
+		algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(algoBox_Label);
+		
+		
+		
+		String[] algoList = {"Breadth First Search(BFS)","Depth First Search(DFS)"};
+		algoBox = new JComboBox<String>(algoList);
+		algoBox.setBounds(Small_Panel.getSize().width/2-160, 470, 280, 30);
+		algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
+		algoBox.setFocusable(false);
+		algoBox.addActionListener(this);
+		mode = algoBox.getSelectedIndex();
 
-            if(flag) {
-                maze.initStartAndEnd();
-                flag = false;
-            }
+		
 
-        }
-        //nút reset maze
-        if(e.getSource()==resetButton) {
-            flag = true;
-            maze.resetMaze();
-            tm.start();
-        }
-        if(running==1)
-            repaint();
-    }
-    @Override
-    public void stateChanged(ChangeEvent e) {
-        //cellSlider
-        if(e.getSource()==cellSlider) {
-            if(cellSlider.getValue()%5==0) {
-                mazeCheckbox.setEnabled(true);
-                cellLabel.setText("Cell's size adjustment: " + cellSlider.getValue());
-                cellSize = cellSlider.getValue();
-                startButton.setText("Start");
-                flag = true;
-                initMaze();
-                reset();
-            }
-        }
+		Small_Panel.add(algoBox);
+		
+		Language_label = new JLabel("Language:");
+		Language_label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
+		Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(Language_label);
+		
+		
+		
+		String[] Language_list = {"English","Français","Deutsch","日本","Español","Russian","فارسی"};
+		Language_box = new JComboBox<String>(Language_list);
+		Language_box.setBounds(Small_Panel.getSize().width/2-160, 400, 220, 30);
+		Language_box.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+		Language_box.setFocusable(false);
+		Language_box.addActionListener(this);
+		Small_Panel.add(Language_box);
+		
+		
 
-        //SpeedSlider
-        if(e.getSource()==speedSlider) {
-            speedLabel.setText("Speed: " + speedSlider.getValue());
-            delay = slowestDelay - (speedSlider.getValue()-1)* ((slowestDelay-10)/4) ;
-            tm.setDelay(delay);
-            System.out.println(delay);
-        }
+		Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 300, 160, 60,new Color(20, 115, 0));
+		Small_Panel.add(Start_Solving_Button);
+		Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+		Start_Solving_Button.addActionListener(this);
+		Start_Solving_Button.setEnabled(false);
+		
+
+		Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 300, 160, 60,new Color(225, 120, 50));
+		Reset_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+		Small_Panel.add(Reset_Button);
+		Reset_Button.addActionListener(this);
+				
+		
+		
+		initMaze();
+		tm.start();
+	}
+	
+	
+	private void initMaze() {
+		maze = new myMaze(Maze_Size,Cell_Size);	
+	}
+
+	public void paintComponent(Graphics g) {
+		
+		if(maze.checkFinished()) {
+			reMaze_Button.setEnabled(true);
+			Reset_Button.setEnabled(false);
+			DifficultyBox.setEnabled(false);
+			Start_Button.setEnabled(false);
+			Start_Solving_Button.setEnabled(true);
+			algoBox.setEnabled(true);
+			Language_box.setEnabled(true);
+		}else {
+			Start_Solving_Button.setEnabled(false);
+			Reset_Button.setEnabled(false);
+			algoBox.setEnabled(false);
+			
+		}
+		
+		super.paintComponent(g);
+		
+		
+	
+		
+		
+		maze.drawMaze(g);
+		
+	
+		if(!flag) {
+			maze.drawPathFinder(g,mode);
+			if(maze.finish) {
+				Maze_CheckBox.setEnabled(false);
+				Start_Solving_Button.setEnabled(false);
+				Reset_Button.setEnabled(true);
+				reMaze_Button.setEnabled(true);
+				
+				tm.stop();
+			}
+		}
+		
+		if(!Maze_CheckBox.isSelected()) {
+			maze.mazeAlgorithm(g);
+		}	
+		else {
+			maze.drawMazeInstantly();
+		}
+		
+		
+		
+		
+		
+	}
+	private void reset() {
+		tm.start();
+		running = -1;	
+		Start_Button.setEnabled(true);
+		DifficultyBox.setEnabled(true);
+		repaint();
+	}
+	
+	
+	
+	
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	
+		
+		
+		if (e.getSource()==Language_box) {
+			if (Language_box.getSelectedIndex()==3) {
+				// japanese
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("子供");
+				DifficultyBox.addItem("中くらい");
+				DifficultyBox.addItem("難しい");
+				DifficultyBox.addItem("伝説");
+				DifficultyBox.addItem("神モード");
+
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("幅優先探索(BFS)");
+				algoBox.addItem("深さ優先探索(DFS)");
+
+				algoBox_Label.setText("パスファインディングアルゴリズム:");
+				Speed_Label.setText("スピード: ");
+				Maze_CheckBox.setText("瞬時に生成: ");
+				Start_Solving_Button.setText("始める");
+				Cell_Label.setText("困難： ");
+				Language_label.setText("言語：");
+				Reset_Button.setText("迷路をリセット");
+				reMaze_Button.setText("再び迷路");
+				Start_Button.setText("始める");
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+
+			}else if (Language_box.getSelectedIndex()==0) {
+				// english
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("kids");
+				DifficultyBox.addItem("medium");
+				DifficultyBox.addItem("hard");
+				DifficultyBox.addItem("legends");
+				DifficultyBox.addItem("god mode");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("Breadth First Search(BFS)");
+				algoBox.addItem("Depth First Search(DFS)");
+
+				algoBox_Label.setText("Pathfinding Algorithms:");
+				Speed_Label.setText("Speed: ");
+				Maze_CheckBox.setText("Generate instantly: ");
+				Start_Solving_Button.setText("Start");
+				Cell_Label.setText("Difficulty: ");
+				Language_label.setText("Language: ");
+				Reset_Button.setText("Reset Maze");
+				reMaze_Button.setText("Re-Maze");
+				Start_Button.setText("Start");
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
+				Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				Reset_Button.setFont(new Font("MV Boli",Font.BOLD,13));
+				Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+				Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+			}
+			else if(Language_box.getSelectedIndex()==1){
+				// french
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("des gamins");
+				DifficultyBox.addItem("moyen");
+				DifficultyBox.addItem("dur");
+				DifficultyBox.addItem("légendes");
+				DifficultyBox.addItem("mode dieu");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("Recherche étendue d'abord(BFS)");
+				algoBox.addItem("Première recherche en profondeur(DFS)");
+
+				algoBox_Label.setText("Algorithmes de recherche de chemin:");
+				Speed_Label.setText("La rapidité: ");
+				Maze_CheckBox.setText("Générez instantanément:");
+				Start_Solving_Button.setText("Commencer");
+				Cell_Label.setText("Difficulté:");
+				Language_label.setText("Langue:");
+				Reset_Button.setText("Réinitialiser dédale");
+				reMaze_Button.setText("dédale à nouveau");
+				Start_Button.setText("Commencer");
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox.setFont(new Font("MV Boli",Font.BOLD,12));
+				algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
+				Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,13));
+				Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,14));
+				Reset_Button.setFont(new Font("MV Boli",Font.BOLD,13));
+				Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+				Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+			}else if (Language_box.getSelectedIndex()==2) {
+				// German
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("Kinder");
+				DifficultyBox.addItem("Mittel");
+				DifficultyBox.addItem("schwer");
+				DifficultyBox.addItem("Legenden");
+				DifficultyBox.addItem("Gott Modus");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("Breitensuche zuerst(BFS)");
+				algoBox.addItem("Tiefensuche zuerst(DFS)");
+
+				algoBox_Label.setText("Pfadfindungsalgorithmen:");
+				Speed_Label.setText("Geschwindigkeit:");
+				Maze_CheckBox.setText("Sofort generieren:");
+				Start_Solving_Button.setText("Anfang");
+				Cell_Label.setText("Schwierigkeit: ");
+				Language_label.setText("Sprache:");
+				Reset_Button.setText("Matze zurücksetzen");
+				reMaze_Button.setText("Labyrinth wieder");
+				Start_Button.setText("Anfang");
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
+				Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				Reset_Button.setFont(new Font("MV Boli",Font.BOLD,12));
+				Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+				Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+			}else if (Language_box.getSelectedIndex()==4) {
+				// spanish
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("niños");
+				DifficultyBox.addItem("medio");
+				DifficultyBox.addItem("Duro");
+				DifficultyBox.addItem("leyendas");
+				DifficultyBox.addItem("modo de Dios");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("Búsqueda primero en amplitud(BFS)");
+				algoBox.addItem("Primera búsqueda en profundidad(DFS)");
+
+				algoBox_Label.setText("Algoritmos de búsqueda de caminos:");
+				Speed_Label.setText("Velocidad:");
+				Maze_CheckBox.setText("Genera al instante: ");
+				Start_Solving_Button.setText("comienzo");
+				Cell_Label.setText("Dificultad:");
+				Language_label.setText("Idioma:");
+				Reset_Button.setText("Restablecer laberinto");
+				reMaze_Button.setText("laberinto de nuevo");
+				Start_Button.setText("comienzo");
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				algoBox.setFont(new Font("MV Boli",Font.BOLD,13));
+				algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
+				Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,13));
+				Reset_Button.setFont(new Font("MV Boli",Font.BOLD,12));
+				Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+				Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+				Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+			}else if (Language_box.getSelectedIndex()==5) {
+				// russian
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("Дети");
+				DifficultyBox.addItem("средний");
+				DifficultyBox.addItem("жесткий");
+				DifficultyBox.addItem("легенды");
+				DifficultyBox.addItem("режим бога");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("Поиск в ширину(BFS)");
+				algoBox.addItem("Поиск в глубину(DFS)");
+
+				algoBox_Label.setText("Алгоритмы поиска пути:");
+				Speed_Label.setText("Скорость:");
+				Maze_CheckBox.setText("Сгенерировать мгновенно:");
+				Start_Solving_Button.setText("Начинать");
+				Cell_Label.setText("Сложность: ");
+				Language_label.setText("Язык: ");
+				Reset_Button.setText("Сбросить лабиринт");
+				reMaze_Button.setText("Лабиринт снова");
+				Start_Button.setText("Начинать");
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,12));
+				Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+			}else if (Language_box.getSelectedIndex()==6) {
+				// فارسی
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(1);
+				DifficultyBox.removeItemAt(2);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.removeItemAt(0);
+				DifficultyBox.addItem("برای بچه ها");
+				DifficultyBox.addItem("متوسط");
+				DifficultyBox.addItem("سخت");
+				DifficultyBox.addItem("برای افسانه ها");
+				DifficultyBox.addItem("لول خدایان");
+				algoBox.removeItemAt(0);
+				algoBox.removeItemAt(0);
+				algoBox.addItem("جستجوی سطح اول(BFS)");
+				algoBox.addItem("جستجوی عمقی اول(DFS)");
+
+				algoBox_Label.setText("الگوریتم های راه یابی:");
+				Speed_Label.setText("سرعت: ");
+				Maze_CheckBox.setText("تولید آنی: ");
+				Start_Solving_Button.setText("شروع");
+				Cell_Label.setText("سختی: ");
+				Language_label.setText("زبان: ");
+				Reset_Button.setText("تنظیم مجدد ماز");
+				reMaze_Button.setText("ساخت مجدد ماز ");
+				Start_Button.setText("شروع");
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
+				Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,12));
+				Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+				Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+				Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+			}
+		}
+		
+		if(e.getSource()==reMaze_Button) {
+			flag = true;
+			Maze_CheckBox.setEnabled(true);
+			reMaze_Button.setEnabled(false);
+			initMaze();
+			reset();
+			if (Language_box.getSelectedIndex()==0){
+				Start_Button.setText("Start");
+			} else if(Language_box.getSelectedIndex()==1){
+				Start_Button.setText("Commencer");
+			}
+			else if (Language_box.getSelectedIndex()==3){
+			Start_Button.setText("始める");}
+			else if (Language_box.getSelectedIndex()==2){
+				Start_Button.setText("Anfang");
+			} else if (Language_box.getSelectedIndex()==4){
+				Start_Button.setText("comienzo");
+			}else if (Language_box.getSelectedIndex()==5){
+				Start_Button.setText("Начинать");
+			}else if (Language_box.getSelectedIndex()==6){
+				Start_Button.setText("شروع");
+			} 
+		}
+		
+		
+			
+		
+		if (e.getSource()==Start_Button) {
+			DifficultyBox.setEnabled(false);
+			running *= -1;
+			if(running == 1){
+				if (Language_box.getSelectedIndex()==3){
+					Start_Button.setText("一時停止");}
+				else if (Language_box.getSelectedIndex()==0){
+				Start_Button.setText("Pause");
+			}else if (Language_box.getSelectedIndex()==1){
+				Start_Button.setText("Pause");
+			}else if (Language_box.getSelectedIndex()==2){
+				Start_Button.setText("Pause");
+			} else if (Language_box.getSelectedIndex()==4){
+				Start_Button.setText("Pausa");
+			}else if (Language_box.getSelectedIndex()==5){
+				Start_Button.setText("Пауза");
+			}else if (Language_box.getSelectedIndex()==6){
+				Start_Button.setText("توقف");
+			}
+			}
+			else{
+				if (Language_box.getSelectedIndex()==3){
+					Start_Button.setText("始める");}
+				if (Language_box.getSelectedIndex()==0){
+						Start_Button.setText("Start");
+					} else if(Language_box.getSelectedIndex()==1){
+						Start_Button.setText("Commencer");
+					}else if (Language_box.getSelectedIndex()==2){
+						Start_Button.setText("Anfang");
+					} else if (Language_box.getSelectedIndex()==4){
+						Start_Button.setText("comienzo");
+					}else if (Language_box.getSelectedIndex()==5){
+						Start_Button.setText("Начинать");
+					} else if (Language_box.getSelectedIndex()==6){
+						Start_Button.setText("شروع");
+					} 
+				}
+				reMaze_Button.setEnabled(true);
+			}
+		
+		
+	
+
+		if(e.getSource()==algoBox) {
+			mode = algoBox.getSelectedIndex();
+		}
+	
+		
+		
+		
+		
+		if(e.getSource() == Start_Solving_Button) {
+			Maze_CheckBox.setSelected(false);
+			Maze_CheckBox.setEnabled(false);
+			algoBox.setEnabled(false);
+			
+			
+			
+			if(flag) {
+				maze.initStartAndEnd();
+				flag = false;
+			}
+			
+		}
+		
+		
+		
+		if(e.getSource()==Reset_Button) {
+			flag = true;
+			maze.resetMaze();
+			tm.start();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		if(running==1)
+			repaint();
+			
+
+		if(e.getSource()==DifficultyBox) {
+			if(DifficultyBox.getSelectedIndex()==0) {
+				Maze_CheckBox.setEnabled(true);
+				if (Language_box.getSelectedIndex()==3) {
+					Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("始める");
+				}else if (Language_box.getSelectedIndex()==0) {
+					Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Start");
+				}else if(Language_box.getSelectedIndex()==1){
+					Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Commencer");
+				}else if (Language_box.getSelectedIndex()==2) {
+					Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Anfang");
+				}else if (Language_box.getSelectedIndex()==4) {
+					Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("comienzo");
+				}else if (Language_box.getSelectedIndex()==5) {
+					Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Начинать");
+				}else if (Language_box.getSelectedIndex()==6) {
+					Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("شروع");
+				}
+				
+				Cell_Size = 100;
+				
+				flag = true;
+				initMaze();
+				reset();
+			}
+			else if(DifficultyBox.getSelectedIndex()==1) {
+				Maze_CheckBox.setEnabled(true);
+				if (Language_box.getSelectedIndex()==3) {
+					Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("始める");
+				}if (Language_box.getSelectedIndex()==0) {
+					Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Start");
+				}else if(Language_box.getSelectedIndex()==1){
+					Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Commencer");
+				}else if (Language_box.getSelectedIndex()==2) {
+					Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Anfang");
+				}else if (Language_box.getSelectedIndex()==4) {
+					Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("comienzo");
+				}else if (Language_box.getSelectedIndex()==5) {
+					Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Начинать");
+				}else if (Language_box.getSelectedIndex()==6) {
+					Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("شروع");
+				}
+				Cell_Size = 70;
+				flag = true;
+				initMaze();
+				reset();
+			}else if(DifficultyBox.getSelectedIndex()==2) {
+				Maze_CheckBox.setEnabled(true);
+				if (Language_box.getSelectedIndex()==3) {
+					Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("始める");
+				}if (Language_box.getSelectedIndex()==0) {
+					Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Start");
+				}else if(Language_box.getSelectedIndex()==1){
+					Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Commencer");
+				}else if (Language_box.getSelectedIndex()==2) {
+					Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Anfang");
+				}else if (Language_box.getSelectedIndex()==4) {
+					Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("comienzo");
+				}else if (Language_box.getSelectedIndex()==5) {
+					Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Начинать");
+				}else if (Language_box.getSelectedIndex()==6) {
+					Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("شروع");
+				}
+				Cell_Size = 50;
+				flag = true;
+				initMaze();
+				reset();
+			}
+			else if(DifficultyBox.getSelectedIndex()==3) {
+				Maze_CheckBox.setEnabled(true);
+				if (Language_box.getSelectedIndex()==3) {
+					Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("始める");
+				}if (Language_box.getSelectedIndex()==0) {
+					Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Start");
+				}else if(Language_box.getSelectedIndex()==1){
+					Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Commencer");
+				}else if (Language_box.getSelectedIndex()==2) {
+					Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Anfang");
+				}else if (Language_box.getSelectedIndex()==4) {
+					Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("comienzo");
+				}else if (Language_box.getSelectedIndex()==5) {
+					Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Начинать");
+				}else if (Language_box.getSelectedIndex()==6) {
+					Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("شروع");
+				}
+				Cell_Size = 20;
+				flag = true;
+				initMaze();
+				reset();
+			}else if(DifficultyBox.getSelectedIndex()==4) {
+				Maze_CheckBox.setEnabled(true);
+				if (Language_box.getSelectedIndex()==3) {
+					Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("始める");
+				}if (Language_box.getSelectedIndex()==0) {
+					Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Start");
+				}else if(Language_box.getSelectedIndex()==1){
+					Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Commencer");
+				}else if (Language_box.getSelectedIndex()==2) {
+					Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Anfang");
+				}else if (Language_box.getSelectedIndex()==4) {
+					Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("comienzo");
+				}else if (Language_box.getSelectedIndex()==5) {
+					Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
+					Start_Button.setText("Начинать");
+				}else if (Language_box.getSelectedIndex()==6) {
+					Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
+					Start_Button.setText("شروع");
+				}
+				Cell_Size = 5;
+				flag = true;
+				initMaze();
+				reset();
+			}
+		}
+	}
 
 
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		
+		
+	
+		
+		
+		
+		
+		if(e.getSource()==Speed_Slider) {
+				if (Language_box.getSelectedIndex()==0) {
+					Speed_Label.setText("Speed: " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==1) {
+					Speed_Label.setText("La rapidité: " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==3) {
+					Speed_Label.setText("スピード： " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==2) {
+					Speed_Label.setText("Geschwindigkeit: " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==4) {
+					Speed_Label.setText("Velocidad: " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==5) {
+					Speed_Label.setText("Скорость: " + Speed_Slider.getValue());
+				}else if (Language_box.getSelectedIndex()==6) {
+					Speed_Label.setText("سرعت: " + Speed_Slider.getValue());
+				}
+				
+				delay = Slowest_Delay - (Speed_Slider.getValue()-1)* ((Slowest_Delay-5)/5) ;
+				tm.setDelay(delay);
+				System.out.println(delay);
+		}
+		
+		
+		
+		
+			
+	}
 
 
-
-    }
-
-
-
-
+	
 
 
 }
