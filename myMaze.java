@@ -59,7 +59,7 @@ public class myMaze{
     public void mazeAlgorithm(Graphics g) {
         if(running) {
             if(Count_Visited<=w*w)
-                current.Draw_Box(g,new Color(0,255,0,100));
+                current.Draw_Box(g,new Color(0,255,100,100));
             update();
             System.out.println(Count_Visited);
         }
@@ -70,20 +70,20 @@ public class myMaze{
     }
 
     public void drawPathFinder(Graphics g,int mode) {
-        if(mode == 0)
+        if(mode==0){
             play(g);
+        }
         else if(mode == 1)
             mazeFinderBFS(g);
-        else if(mode==2){
+        else if(mode == 2)
             mazeFinderDFS(g);
-        }
 
         for(cells x: Paths_From_A_to_B) {
             x.drawPath(g, Color.WHITE);
         }
 
-        Start.Draw_Box(g,new Color(0, 250, 0));
-        End.Draw_Box(g,new Color(250, 0, 0));
+        Start.Draw_Box(g,new Color(250, 250, 250));
+        End.Draw_Box(g,new Color(0, 0, 0));
 
 
         for(int i = 0;i<w;i++) {
@@ -114,6 +114,8 @@ public class myMaze{
             }
         }
     }
+
+
 
     public void update() {
         if (running == false)
@@ -165,6 +167,7 @@ public class myMaze{
             }
         }
     }
+
     public void play(Graphics g) {
         myCode=myFrame.getCode();
         Next = move(myCode,current);
@@ -179,22 +182,17 @@ public class myMaze{
             return;
         }
         if(Next != End && Next != null) {
-            if(!Paths_From_A_to_B.contains(Next) && Next!=Start && current!=Start){
-				Paths_From_A_to_B.add(current);
-				Paths_From_A_to_B.add(Next);
-				}
-				else{
-					Paths_From_A_to_B.remove(current);
-					Paths_From_A_to_B.remove(Next);
-				}
             Next.drawPath(g, Color.ORANGE);
             Next.Visited_Path = true;
+            Next.Visited=true;
             current=Next;
             current.Draw_Box(g,new Color(120,180,180));
 
         }
 
     }
+
+
     public void mazeFinderDFS(Graphics g) {
 
         Next = getOneNeighbor(current);
@@ -221,6 +219,7 @@ public class myMaze{
         }
     }
 
+
     private void Path_Start_End() {
         Paths_From_A_to_B.add(End);
         cells tempParent = End.Parent;
@@ -239,7 +238,9 @@ public class myMaze{
             A.Next.add(B);
     }
 
+
     public void initStartAndEnd() {
+
 
         Start = grids[new Random().nextInt(w)][new Random().nextInt(w)];
         End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
@@ -264,6 +265,7 @@ public class myMaze{
         Next = current;
 
     }
+
     public cells move(int keyCode,cells currentCell){
         cells myCell=null;
         if(keyCode==87){
@@ -289,44 +291,60 @@ public class myMaze{
         return  myCell;
 
     }
+
+
     public cells getOneNeighbor(cells currentCell){
         ArrayList<cells> neighbors = new ArrayList<>();
+
         if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited_Path == false && currentCell.Walls[0] == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
+
         if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited_Path == false && currentCell.Walls[1] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
+
         if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited_Path == false && currentCell.Walls[2] == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
+
         if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited_Path == false && currentCell.Walls[3] == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
+
+
         if (neighbors.isEmpty())
             return null;
+
         return  neighbors.get(0);
     }
 
     public cells getOneRandomNeighbor(cells currentCell) {
         ArrayList<cells> neighbors = new ArrayList<>();
+
         if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
+
         if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
+
         if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited == false) {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
+
         if (currentCell.col-1 >= 0 && grids[currentCell.row][currentCell.col-1].Visited == false) {
             neighbors.add(grids[currentCell.row][currentCell.col-1]);
         }
+
+
         if (neighbors.isEmpty())
             return null;
-        return  neighbors.get(new Random().nextInt(neighbors.size()));
-    }
 
+        return  neighbors.get(new Random().nextInt(neighbors.size()));
+
+    }
     public boolean hasNeighbor(cells currentCell) {
         if (getOneRandomNeighbor(currentCell)!=null)
             return true;
@@ -366,7 +384,7 @@ public class myMaze{
     }
 
     public void setCellSize(int cellSize) {
-        Cell_Size = cellSize + 400;
+        Cell_Size = cellSize;
     }
 
 
