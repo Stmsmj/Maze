@@ -1,5 +1,3 @@
-package maze.h;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,8 +43,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
     private myButton Start_Solving_Button;
     private boolean flag = true;
-    private T t;
-    private JLabel timerLabel;
 
 
 
@@ -59,7 +55,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         this.setPreferredSize(new Dimension(Window_W,Window_H));
         this.setBounds(0, 0, Window_W, Window_H);
-        this.setBackground(new Color(0,0,0));
+        this.setBackground(new Color(50,50,50));
         this.setLayout(null);
 
 
@@ -70,15 +66,9 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.setLayout(null);
         this.add(Small_Panel);
 
-        t = new T();
-        timerLabel =new JLabel("Time : ");
-        timerLabel.setBounds(100,500,100,100);
-        Small_Panel.add(timerLabel);
-        t.setLabel(timerLabel);
 
 
-
-        Start_Button = new myButton("Start",(int)(Small_Panel.getSize().width/2)+30, 120, 160, 50,new Color(102,80 ,153));
+        Start_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 190, 160, 60,new Color(100,149 ,237));
         Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Start_Button);
         Start_Button.addActionListener(this);
@@ -86,7 +76,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
 
-        reMaze_Button = new myButton("Re-Maze",(int)(Small_Panel.getSize().width/2)+30, 60, 160, 50,Color.CYAN);
+        reMaze_Button = new myButton("Re-Maze",Small_Panel.getSize().width/2+20, 190, 160, 60,new Color(240,128,128));
         reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(reMaze_Button);
         reMaze_Button.addActionListener(this);
@@ -115,7 +105,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         Speed_Slider = new JSlider(1,6,3);
-        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 230, 350, 40);
+        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 290, 350, 40);
         Speed_Slider.setPaintTrack(true);
         Speed_Slider.setMajorTickSpacing(1);
         Speed_Slider.setSnapToTicks(true);
@@ -124,7 +114,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         Speed_Label = new JLabel();
         Speed_Label.setText("Speed: " + Speed_Slider.getValue());
-        Speed_Label.setBounds(30, 210, 220, 20);
+        Speed_Label.setBounds(30, 270, 220, 20);
         Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
 
         Small_Panel.add(Speed_Label);
@@ -137,8 +127,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Maze_CheckBox.setFocusable(false);
         Small_Panel.add(Maze_CheckBox);
 
-        algoBox_Label = new JLabel("Pathfinding Algorithms");
-        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155, 440, 280, 30);
+        algoBox_Label = new JLabel("Pathfinding Algorithms:");
+        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155,490 , 280, 30);
         algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(algoBox_Label);
 
@@ -146,7 +136,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         String[] algoList = {"play","Breadth First Search(BFS)","Depth First Search(DFS)"};
         algoBox = new JComboBox<String>(algoList);
-        algoBox.setBounds(Small_Panel.getSize().width/2-160, 470, 280, 30);
+        algoBox.setBounds(Small_Panel.getSize().width/2-160,520 , 280, 30);
         algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
         algoBox.setFocusable(false);
         algoBox.addActionListener(this);
@@ -157,7 +147,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.add(algoBox);
 
         Language_label = new JLabel("Language:");
-        Language_label.setBounds(Small_Panel.getSize().width/2-155, 370, 220, 30);
+        Language_label.setBounds(Small_Panel.getSize().width/2-155, 420, 220, 30);
         Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Language_label);
 
@@ -165,7 +155,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         String[] Language_list = {"English","Français","Deutsch","日本","Español","Russian","فارسی"};
         Language_box = new JComboBox<String>(Language_list);
-        Language_box.setBounds(Small_Panel.getSize().width/2-160, 400, 220, 30);
+        Language_box.setBounds(Small_Panel.getSize().width/2-160, 450, 220, 30);
         Language_box.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
         Language_box.setFocusable(false);
         Language_box.addActionListener(this);
@@ -173,14 +163,14 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
 
-        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 300, 160, 60,new Color(20, 115, 0));
+        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 350, 160, 60,new Color(127, 255, 212));
         Small_Panel.add(Start_Solving_Button);
         Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Start_Solving_Button.addActionListener(this);
         Start_Solving_Button.setEnabled(false);
 
 
-        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 300, 160, 60,new Color(225, 120, 50));
+        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 350, 160, 60,new Color(112, 128, 144));
         Reset_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Reset_Button);
         Reset_Button.addActionListener(this);
@@ -232,7 +222,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Speed_Slider.setEnabled(true);
 
                 tm.stop();
-                t.pause();
             }
         }
 
@@ -257,16 +246,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
     }
 
 
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
 
-
-        if (e.getSource()==Language_box) {
+if (e.getSource()==Language_box) {
             if (Language_box.getSelectedIndex()==3) {
                 // japanese
                 DifficultyBox.removeItemAt(0);
@@ -538,8 +522,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
                 Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
                 Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-            }
-        }
+            }}
+
 
         if(e.getSource()==reMaze_Button) {
             flag = true;
@@ -549,20 +533,20 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
             initMaze();
             reset();
             if (Language_box.getSelectedIndex()==0){
-                Start_Button.setText("Start");
-            } else if(Language_box.getSelectedIndex()==1){
-                Start_Button.setText("Commencer");
+                Start_Button.setText("Make-Maze");
+            }else if(Language_box.getSelectedIndex()==1){
+                Start_Button.setText("faire un labyrinthe");
             }
             else if (Language_box.getSelectedIndex()==3){
-                Start_Button.setText("始める");}
+                Start_Button.setText("迷路を作る");}
             else if (Language_box.getSelectedIndex()==2){
-                Start_Button.setText("Anfang");
+                Start_Button.setText("Labyrinth machen");
             } else if (Language_box.getSelectedIndex()==4){
-                Start_Button.setText("comienzo");
+                Start_Button.setText("hacer laberinto");
             }else if (Language_box.getSelectedIndex()==5){
-                Start_Button.setText("Начинать");
+                Start_Button.setText("сделать лабиринт");
             }else if (Language_box.getSelectedIndex()==6){
-                Start_Button.setText("شروع");
+                Start_Button.setText("ساختن ماز");
             }
         }
 
@@ -570,7 +554,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         if (e.getSource()==Start_Button) {
-            //t.start();
             DifficultyBox.setEnabled(false);
             running *= -1;
             if(running == 1){
@@ -592,19 +575,19 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
             }
             else{
                 if (Language_box.getSelectedIndex()==3){
-                    Start_Button.setText("始める");}
+                    Start_Button.setText("迷路を作る");}
                 if (Language_box.getSelectedIndex()==0){
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 } else if(Language_box.getSelectedIndex()==1){
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2){
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 } else if (Language_box.getSelectedIndex()==4){
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5){
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 } else if (Language_box.getSelectedIndex()==6){
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
             }
             reMaze_Button.setEnabled(true);
@@ -622,7 +605,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         if(e.getSource() == Start_Solving_Button) {
-            t.start();
             Maze_CheckBox.setSelected(false);
             Maze_CheckBox.setEnabled(false);
             Speed_Slider.setEnabled(false);
@@ -665,25 +647,25 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Maze_CheckBox.setEnabled(true);
                 if (Language_box.getSelectedIndex()==3) {
                     Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("始める");
+                    Start_Button.setText("迷路を作る");
                 }else if (Language_box.getSelectedIndex()==0) {
                     Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 }else if(Language_box.getSelectedIndex()==1){
                     Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2) {
                     Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 }else if (Language_box.getSelectedIndex()==4) {
                     Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5) {
                     Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 }else if (Language_box.getSelectedIndex()==6) {
                     Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
 
                 Cell_Size = 100;
@@ -696,25 +678,25 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Maze_CheckBox.setEnabled(true);
                 if (Language_box.getSelectedIndex()==3) {
                     Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("始める");
+                    Start_Button.setText("迷路を作る");
                 }if (Language_box.getSelectedIndex()==0) {
                     Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 }else if(Language_box.getSelectedIndex()==1){
                     Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2) {
                     Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 }else if (Language_box.getSelectedIndex()==4) {
                     Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5) {
                     Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 }else if (Language_box.getSelectedIndex()==6) {
                     Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
                 Cell_Size = 70;
                 flag = true;
@@ -724,25 +706,25 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Maze_CheckBox.setEnabled(true);
                 if (Language_box.getSelectedIndex()==3) {
                     Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("始める");
+                    Start_Button.setText("迷路を作る");
                 }if (Language_box.getSelectedIndex()==0) {
                     Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 }else if(Language_box.getSelectedIndex()==1){
                     Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2) {
                     Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 }else if (Language_box.getSelectedIndex()==4) {
                     Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5) {
                     Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 }else if (Language_box.getSelectedIndex()==6) {
                     Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
                 Cell_Size = 50;
                 flag = true;
@@ -753,25 +735,25 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Maze_CheckBox.setEnabled(true);
                 if (Language_box.getSelectedIndex()==3) {
                     Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("始める");
+                    Start_Button.setText("迷路を作る");
                 }if (Language_box.getSelectedIndex()==0) {
                     Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 }else if(Language_box.getSelectedIndex()==1){
                     Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2) {
                     Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 }else if (Language_box.getSelectedIndex()==4) {
                     Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5) {
                     Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 }else if (Language_box.getSelectedIndex()==6) {
                     Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
                 Cell_Size = 20;
                 flag = true;
@@ -781,25 +763,25 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
                 Maze_CheckBox.setEnabled(true);
                 if (Language_box.getSelectedIndex()==3) {
                     Cell_Label.setText("困難： " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("始める");
+                    Start_Button.setText("迷路を作る");
                 }if (Language_box.getSelectedIndex()==0) {
                     Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Start");
+                    Start_Button.setText("Make-Maze");
                 }else if(Language_box.getSelectedIndex()==1){
                     Cell_Label.setText("Difficulté: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Commencer");
+                    Start_Button.setText("faire un labyrinthe");
                 }else if (Language_box.getSelectedIndex()==2) {
                     Cell_Label.setText("Schwierigkeit: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Anfang");
+                    Start_Button.setText("Labyrinth machen");
                 }else if (Language_box.getSelectedIndex()==4) {
                     Cell_Label.setText("Dificultad: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("comienzo");
+                    Start_Button.setText("hacer laberinto");
                 }else if (Language_box.getSelectedIndex()==5) {
                     Cell_Label.setText("Сложность:" + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("Начинать");
+                    Start_Button.setText("сделать лабиринт");
                 }else if (Language_box.getSelectedIndex()==6) {
                     Cell_Label.setText("سختی: " + DifficultyBox.getSelectedItem());
-                    Start_Button.setText("شروع");
+                    Start_Button.setText("ساختن ماز");
                 }
                 Cell_Size = 5;
                 flag = true;
