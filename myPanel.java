@@ -68,7 +68,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
 
-        Start_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 190, 160, 60,new Color(100,149 ,237));
+        Start_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 240, 160, 60,new Color(100,149 ,237));
         Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Start_Button);
         Start_Button.addActionListener(this);
@@ -76,7 +76,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
 
-        reMaze_Button = new myButton("Re-Maze",Small_Panel.getSize().width/2+20, 190, 160, 60,new Color(240,128,128));
+        reMaze_Button = new myButton("Re-Maze",Small_Panel.getSize().width/2+20, 240, 160, 60,new Color(240,128,128));
         reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(reMaze_Button);
         reMaze_Button.addActionListener(this);
@@ -85,7 +85,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Difficulties=new String[] {"kids","medium","hard","legends","god mode"};
 
         DifficultyBox= new JComboBox<String>(Difficulties);
-        DifficultyBox.setBounds(30, 120, 150, 50);
+        DifficultyBox.setBounds(30, 170, 150, 50);
         DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
         DifficultyBox.setFocusable(false);
         DifficultyBox.addActionListener(this);
@@ -96,7 +96,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         Cell_Label = new JLabel();
         Cell_Label.setText("Difficulty: " + DifficultyBox.getSelectedItem());
-        Cell_Label.setBounds(30, 100, 250, 20);
+        Cell_Label.setBounds(30, 150, 250, 20);
         Cell_Label.setFont(new Font("MV Boli",Font.BOLD,18));
 
         Small_Panel.add(Cell_Label);
@@ -105,7 +105,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
         Speed_Slider = new JSlider(1,6,3);
-        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 290, 350, 40);
+        Speed_Slider.setBounds((Window_W-Maze_Size)/2-(350/2), 340, 350, 40);
         Speed_Slider.setPaintTrack(true);
         Speed_Slider.setMajorTickSpacing(1);
         Speed_Slider.setSnapToTicks(true);
@@ -121,14 +121,14 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.add(Speed_Slider);
 
         Maze_CheckBox = new JCheckBox();
-        Maze_CheckBox.setBounds((int)30, 60, 200, 20);
+        Maze_CheckBox.setBounds((int)30, 110, 200, 20);
         Maze_CheckBox.setText("Generate instantly");
         Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
         Maze_CheckBox.setFocusable(false);
         Small_Panel.add(Maze_CheckBox);
 
         algoBox_Label = new JLabel("Pathfinding Algorithms:");
-        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155,490 , 280, 30);
+        algoBox_Label.setBounds(Small_Panel.getSize().width/2-155,540 , 280, 30);
         algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(algoBox_Label);
 
@@ -136,7 +136,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         String[] algoList = {"play","Breadth First Search(BFS)","Depth First Search(DFS)"};
         algoBox = new JComboBox<String>(algoList);
-        algoBox.setBounds(Small_Panel.getSize().width/2-160,520 , 280, 30);
+        algoBox.setBounds(Small_Panel.getSize().width/2-160,570 , 280, 30);
         algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
         algoBox.setFocusable(false);
         algoBox.addActionListener(this);
@@ -147,7 +147,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
         Small_Panel.add(algoBox);
 
         Language_label = new JLabel("Language:");
-        Language_label.setBounds(Small_Panel.getSize().width/2-155, 420, 220, 30);
+        Language_label.setBounds(Small_Panel.getSize().width/2-155, 470, 220, 30);
         Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Language_label);
 
@@ -155,7 +155,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
         String[] Language_list = {"English","Français","Deutsch","日本","Español","Russian","فارسی"};
         Language_box = new JComboBox<String>(Language_list);
-        Language_box.setBounds(Small_Panel.getSize().width/2-160, 450, 220, 30);
+        Language_box.setBounds(Small_Panel.getSize().width/2-160, 500, 220, 30);
         Language_box.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
         Language_box.setFocusable(false);
         Language_box.addActionListener(this);
@@ -163,14 +163,14 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener{
 
 
 
-        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 350, 160, 60,new Color(127, 255, 212));
+        Start_Solving_Button = new myButton("Start",Small_Panel.getSize().width/2-130-20, 400, 160, 60,new Color(127, 255, 212));
         Small_Panel.add(Start_Solving_Button);
         Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Start_Solving_Button.addActionListener(this);
         Start_Solving_Button.setEnabled(false);
 
 
-        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 350, 160, 60,new Color(112, 128, 144));
+        Reset_Button = new myButton("Reset Maze",Small_Panel.getSize().width/2+20, 400, 160, 60,new Color(112, 128, 144));
         Reset_Button.setFont(new Font("MV Boli",Font.BOLD,15));
         Small_Panel.add(Reset_Button);
         Reset_Button.addActionListener(this);
