@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.mazewelcome;
 
 import javax.swing.*;
@@ -25,7 +21,6 @@ public class T
             {
                 label.setText("Timer ran " + j + " : "+i++);
             }
-            // System.out.println("Timer ran " + j + " : "+i++);
             if(i == 60) 
             {
                 j++;
@@ -57,14 +52,4 @@ public class T
             timer.cancel();
         }
     }
-
-    //public T() {
-         //obj = new T();
-
-         //synchronized(obj) {
-             //obj.wait();
-             //timer.cancel();
-             //System.out.println(timer.purge());
-         //}
-    //}
 }

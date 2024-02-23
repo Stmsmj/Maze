@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.mazewelcome;
 
 /**
@@ -648,7 +644,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
         if (e.getSource()==Start_Button) 
         {
-            //t.start();
             DifficultyBox.setEnabled(false);
             running *= -1;
             if(running == 1)

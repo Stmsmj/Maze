@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.mazewelcome;
 
 /**
@@ -74,9 +70,8 @@ public class Users
                     user1.add(data1[0]);
                     time1.add(data1[1]);
                     date1.add(data1[2]);
-                    Level1.add(data1[3]);   //+" "+Level1.get(numberOfprofile-1)
+                    Level1.add(data1[3]);   
                     numberOfprofile=numberOfprofile+1;
-              //  System.out.println(user1.get(numberOfprofile-1)+"   "+time1.get(numberOfprofile-1)+"    "+date1.get(numberOfprofile-1)+" "+Level1.get(numberOfprofile-1));
                }
         } 
         
