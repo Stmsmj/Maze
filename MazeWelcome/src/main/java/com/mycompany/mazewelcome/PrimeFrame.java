@@ -1,7 +1,7 @@
 package com.mycompany.mazewelcome;
+
+
 import java.awt.*;
-
-
 import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author ae
  */
+
 public class PrimeFrame extends javax.swing.JFrame 
 {
     static String languageInAll=new String();
@@ -55,8 +56,8 @@ public class PrimeFrame extends javax.swing.JFrame
         setSize(new java.awt.Dimension(612, 692));
         getContentPane().setLayout(null);
 
-        Start.setBackground(new java.awt.Color(0, 204, 0));
-        Start.setForeground(new java.awt.Color(255, 51, 0));
+        Start.setBackground(new java.awt.Color(100, 100, 100));
+        Start.setForeground(new java.awt.Color(0, 0, 10));
         Start.setText("Start");
 
 
@@ -72,8 +73,8 @@ public class PrimeFrame extends javax.swing.JFrame
         getContentPane().add(Start);
         Start.setBounds(440, 612, 130, 40);
 
-        select.setBackground(new java.awt.Color(0, 204, 0));
-        select.setForeground(new java.awt.Color(255, 0, 0));
+        select.setBackground(new java.awt.Color(100, 100, 100));
+        select.setForeground(new java.awt.Color(0, 0, 20));
         select.setText("Select Profile");
 
 
@@ -109,8 +110,8 @@ public class PrimeFrame extends javax.swing.JFrame
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 150, 150);
 
-        create.setBackground(new java.awt.Color(0, 204, 0));
-        create.setForeground(new java.awt.Color(255, 51, 0));
+        create.setBackground(new java.awt.Color(100, 100, 100));
+        create.setForeground(new java.awt.Color(0, 0, 10));
         create.setText("Create profile");
 
 
@@ -126,9 +127,9 @@ public class PrimeFrame extends javax.swing.JFrame
         getContentPane().add(create);
         create.setBounds(70, 612, 140, 40);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("             Welcom To maze");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("                         Maze");
         jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jLabel3);
         jLabel3.setBounds(190, 50, 300, 30);
@@ -151,10 +152,12 @@ public class PrimeFrame extends javax.swing.JFrame
         else 
 
         { 
-            JOptionPane.showMessageDialog(rootPane, "please first select profile", "eror", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "please first select a profile", "Error", JOptionPane.WARNING_MESSAGE);
         }
 
-        if(Startgame==true){new myFrame();}
+        if(Startgame==true){
+            new myFrame();
+            this.setVisible(false);}
 
     }
 
@@ -165,15 +168,28 @@ public class PrimeFrame extends javax.swing.JFrame
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) 
     {
-        if(CreateProfile.Create==true)
+
+    // checking that is there created profiles or we should create one!
+
+        File Users = new File("Username.txt");
+        boolean UserListIsEmpty ;
+    
+        if(Users.length()==0){
+            UserListIsEmpty = true;
+        }
+        else{UserListIsEmpty=false;}
+
+
+    // opening the select frame
+        if(UserListIsEmpty==false)
         {
-            SelectProfile a=new SelectProfile();
+            SelectProfile a = new SelectProfile();
             a.setVisible(true);
         }
-
+    // showing the error for creating a profile
         else
         {
-            JOptionPane.showMessageDialog(rootPane, "please first create profile", "eror", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "please first create a profile", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
 

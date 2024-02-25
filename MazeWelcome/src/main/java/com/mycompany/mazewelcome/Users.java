@@ -43,7 +43,7 @@ public class Users
         
         catch (Exception e) 
         {
-            JOptionPane.showMessageDialog(null, "Username File does'nt exist");        
+            JOptionPane.showMessageDialog(null, "Username File does not exist");        
         }
     }
 

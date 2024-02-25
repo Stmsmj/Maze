@@ -13,8 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class SelectProfile extends javax.swing.JFrame 
 {
-    static String UsernameInall=new String();   
-    static boolean Select=false;
+    static String UsernameInall = new String();   
+    static boolean Select = false;
+
     ArrayList<String>Allprofile = new ArrayList<>() ;
     String[]Allprofile2=new String[Allprofile.size()];
      
@@ -22,16 +23,22 @@ public class SelectProfile extends javax.swing.JFrame
     public SelectProfile() 
     {
         File profile=new File("Username.txt");
-         try {
+
+        try {
+
         Scanner Reader= new Scanner(profile);
+
              while(Reader.hasNextLine()){
-         String data=Reader.nextLine();  
-             Allprofile.add(data);}
+
+                String data = Reader.nextLine();  
+                Allprofile.add(data);
+            }
+
         } 
 
         catch (FileNotFoundException e) 
         {
-            JOptionPane.showMessageDialog(rootPane, "please creat profile","eror",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "please creat profile","Error",JOptionPane.WARNING_MESSAGE);
         }
 
         Allprofile2=Allprofile.toArray(Allprofile2);
