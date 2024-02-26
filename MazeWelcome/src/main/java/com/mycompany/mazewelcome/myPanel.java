@@ -52,7 +52,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
     private myButton Start_Solving_Button;
     private boolean flag = true;
-    private T t;
+    private myTimer t;
     private JLabel timerLabel;
 
 
@@ -77,8 +77,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
 
 
-        t = new T();
-        timerLabel =new JLabel("Time : ");
+        t = new myTimer();
+        timerLabel =new JLabel("Timer : ");
         timerLabel.setBounds(100,500,100,100);
         Small_Panel.add(timerLabel);
         t.setLabel(timerLabel);
@@ -248,9 +248,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 tm.stop();
                 t.pause();
+
                 Mode=algoBox.getSelectedItem().toString();
                 Level=DifficultyBox.getSelectedItem().toString() + "  " +"Mode-->"+Mode;
-                double zaman =T.j*60+T.i-1;
+                double zaman =myTimer.minute*60+myTimer.second-1;
+
 
                 try 
                 {
@@ -601,6 +603,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
             Maze_CheckBox.setEnabled(true);
             reMaze_Button.setEnabled(false);
             Speed_Slider.setEnabled(true);
+            t.reset();
             initMaze();
             reset();
             if (Language_box.getSelectedIndex()==0)
@@ -757,6 +760,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
             flag = true;
             maze.resetMaze();
             tm.start();
+            t.reset();
         }
 
 
