@@ -98,10 +98,6 @@ public class CreateProfile extends javax.swing.JFrame
         pack();
     }
 
-    private void UsernameTxtfieldActionPerformed(java.awt.event.ActionEvent evt) 
-    {
-
-    }
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) 
     {
