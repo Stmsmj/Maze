@@ -129,10 +129,10 @@ public class PrimeFrame extends javax.swing.JFrame
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 20));
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("                         Maze");
-        jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel3.setText("                        Maze");
+        jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.SoftBevelBorder.LOWERED));
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(190, 50, 300, 30);
+        jLabel3.setBounds(170, 50, 300, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("prime.jpg"));
         getContentPane().add(jLabel1);
@@ -163,7 +163,16 @@ public class PrimeFrame extends javax.swing.JFrame
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) 
     {
-        new CreateProfile().setVisible(true);
+        CreateProfile create_frame =  new CreateProfile();
+        create_frame.setVisible(true);
+
+        create_frame.back_button.addActionListener(new java.awt.event.ActionListener() 
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt) 
+            {
+                create_frame.dispose();
+            }
+        });
     }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) 
