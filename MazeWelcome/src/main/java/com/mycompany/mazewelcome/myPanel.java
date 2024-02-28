@@ -308,6 +308,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("遊ぶ");
                 algoBox.addItem("幅優先探索(BFS)");
                 algoBox.addItem("深さ優先探索(DFS)");
 
@@ -352,6 +354,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("Play");
                 algoBox.addItem("Breadth First Search(BFS)");
                 algoBox.addItem("Depth First Search(DFS)");
 
@@ -395,6 +399,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("Jouer");
                 algoBox.addItem("Recherche étendue d'abord(BFS)");
                 algoBox.addItem("Première recherche en profondeur(DFS)");
 
@@ -438,6 +444,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("Spielen");
                 algoBox.addItem("Breitensuche zuerst(BFS)");
                 algoBox.addItem("Tiefensuche zuerst(DFS)");
 
@@ -481,6 +489,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("Jugar");
                 algoBox.addItem("Búsqueda primero en amplitud(BFS)");
                 algoBox.addItem("Primera búsqueda en profundidad(DFS)");
 
@@ -524,6 +534,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
+                algoBox.removeItemAt(0);
+                algoBox.addItem("Играть");
                 algoBox.addItem("Поиск в ширину(BFS)");
                 algoBox.addItem("Поиск в глубину(DFS)");
 
