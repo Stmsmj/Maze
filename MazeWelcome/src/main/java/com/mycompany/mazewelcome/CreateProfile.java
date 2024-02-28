@@ -97,8 +97,8 @@ public class CreateProfile extends javax.swing.JFrame
 
         pack();
     }
-
-
+    
+    
     private void createActionPerformed(java.awt.event.ActionEvent evt) 
     {
         String username=UsernameTxtfield.getText();
