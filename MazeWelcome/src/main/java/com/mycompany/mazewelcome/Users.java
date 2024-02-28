@@ -4,6 +4,8 @@ package com.mycompany.mazewelcome;
  *
  * @author ae
  */
+
+import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 public class Users 
 {
@@ -43,7 +47,7 @@ public class Users
         
         catch (Exception e) 
         {
-            JOptionPane.showMessageDialog(null, "Username File does'nt exist");        
+            JOptionPane.showMessageDialog(null, "Username File does not exist");        
         }
     }
 
@@ -80,8 +84,16 @@ public class Users
             JOptionPane.showMessageDialog(null, "Username File does'nt exist"); 
         }
   
-    new Result();         
-    
+    Result result = new Result();
+      
+     // adding action to our button
+    result.continue_button.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+                result.dispose();
+            }
+        });
+
     }
 
 

@@ -1,14 +1,17 @@
 package com.mycompany.mazewelcome;
+
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author ae
  */
+
 public class CreateProfile extends javax.swing.JFrame
 {
     static boolean Create=false;
