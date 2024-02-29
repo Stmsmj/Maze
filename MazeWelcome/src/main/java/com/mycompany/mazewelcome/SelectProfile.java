@@ -54,14 +54,11 @@ public class SelectProfile extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(397, 460));
-        setMinimumSize(new java.awt.Dimension(397, 460));
-        setPreferredSize(new java.awt.Dimension(397, 460));
-        setSize(new java.awt.Dimension(397, 460));
-        getContentPane().setLayout(null);
+        setMaximumSize(new java.awt.Dimension(370, 460));
+        setMinimumSize(new java.awt.Dimension(370, 460));
+        setPreferredSize(new java.awt.Dimension(370, 460));
 
         SelectProfile.setBackground(new java.awt.Color(153, 153, 153));
-        SelectProfile.setForeground(new java.awt.Color(255, 255, 255));
         SelectProfile.setText("select profile");
         SelectProfile.addActionListener(new java.awt.event.ActionListener() 
         {
@@ -71,20 +68,19 @@ public class SelectProfile extends javax.swing.JFrame
             }
         });
         getContentPane().add(SelectProfile);
-        SelectProfile.setBounds(140, 342, 130, 30);
+        SelectProfile.setBounds(120, 342, 130, 30);
 
         jComboBox1.setBackground(new java.awt.Color(153, 153, 153));
         jComboBox1.setModel(new DefaultComboBoxModel<String>
             (Allprofile2));
 
-        jComboBox1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(147, 110, 110, 26);
+        jComboBox1.setBounds(135, 70, 110, 26);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("mazebg.jpg"));
 
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(1, 0, 360, 410);
+        jLabel1.setBounds(0, 0, 360, 425);
 
         pack();
     }
