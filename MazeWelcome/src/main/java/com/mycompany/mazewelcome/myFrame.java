@@ -12,7 +12,7 @@ public class myFrame extends JFrame implements KeyListener
 	public final int Window_Width = 1000;
 	public final int Window_Height = 600;
 
-	// creating a frame
+	// creating a frame and its configurations
 	myFrame()
 	{
 		this.setTitle("Maze Project");
