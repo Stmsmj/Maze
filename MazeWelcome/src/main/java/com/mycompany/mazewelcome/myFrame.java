@@ -11,6 +11,8 @@ public class myFrame extends JFrame implements KeyListener
 
 	public final int Window_Width = 1000;
 	public final int Window_Height = 600;
+
+	// creating a frame
 	myFrame()
 	{
 		this.setTitle("Maze Project");
@@ -27,8 +29,6 @@ public class myFrame extends JFrame implements KeyListener
 		this.setLocationRelativeTo(null);
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e){}
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
