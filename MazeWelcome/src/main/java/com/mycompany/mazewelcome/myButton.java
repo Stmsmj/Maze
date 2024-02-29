@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class myButton extends JButton
 {
+	// function for creating a Button
 	myButton(String name,int x,int y,int Width,int Height,Color Color)
 	{
 		this.setText(name);
