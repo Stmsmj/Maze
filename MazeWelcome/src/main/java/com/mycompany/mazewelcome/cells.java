@@ -25,6 +25,7 @@ public class cells
     private int Stroke_Size;
     public boolean Visited_Path = false;
 
+    
     cells(int row,int col,int Cell_Size)
     {
         this.row = row;
@@ -63,6 +64,7 @@ public class cells
         g.drawString(""+Weight, (int)(c+Cell_Size/2)-(int)(Font_Weight/3), (int)(r+Cell_Size/2)+(int)(Font_Weight/3));
     }
 
+    // function for coloring a cell
     public void Draw_Box(Graphics g,Color color)
     {
         Graphics2D G2D = (Graphics2D) g;
@@ -74,6 +76,7 @@ public class cells
         }
     }
 
+    // for drawing a small rectangle for drawing the path player chose to walk
     public void drawPath(Graphics g,Color color)
     {
         Graphics2D G2D = (Graphics2D) g;
@@ -114,7 +117,7 @@ public class cells
     }
 
 
-
+    // reset cell configuration
     public void Reset_Cell()
     {
         Visited = false;
