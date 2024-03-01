@@ -142,7 +142,7 @@ public class CreateProfile extends javax.swing.JFrame
             if(chekexist==false)
             {
                 JOptionPane.showMessageDialog(rootPane, "The profile succesfully created !", "Succsfuly created", JOptionPane.INFORMATION_MESSAGE);
-                Users new_user=new Users(username);
+                Users new_user = new Users(username);
                 Create=true;
                 this.setVisible(false);
             }

@@ -5,44 +5,47 @@ package com.mycompany.mazewelcome;
  * @author ae
  */
 
+ //importing needed modules
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-public class Users 
+
+//creating class Users
+public class Users
 {
-    
+
+    //initializing the class variables
     String username;
     double time;
+
     static ArrayList<String>user1=new ArrayList<>();
     static  ArrayList<String>time1=new ArrayList<>();
     static  ArrayList<String>date1=new ArrayList<>();
     static  ArrayList<String>Level1=new ArrayList<>();
-    static  int numberOfprofile =0;
+    static  int numberOfprofile = 0;
 
+    //initializing class constructor for adding
     public Users(String username) 
     {
         
-        File userfile=new File("Username.txt");
+        //opening users file
+        File userfile = new File("Username.txt");
         this.username=username;
+
+        //writing the new user on the Username.txt file 
         try 
         {
-            FileWriter file=new FileWriter(userfile, true);
-            BufferedWriter usernamefile= new BufferedWriter(file);
-            usernamefile.write(username+"\n");
-            usernamefile.close();
+            FileWriter file = new FileWriter(userfile, true);
+            BufferedWriter username_buffer_writer = new BufferedWriter(file);
+            username_buffer_writer.write(username+"\n");
+            username_buffer_writer.close();
         } 
         
         catch (Exception e) 
@@ -51,31 +54,40 @@ public class Users
         }
     }
 
+    //initializing second constructor for add user  information to the All.txt
     public Users(String username , double time ) throws IOException 
-    {
-        
+    {   
         this.time = time;
         this.username=username;
-           DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH.mm.ss");  
-           LocalDateTime now = LocalDateTime.now();  
-           String date=dtf.format(now);
-        File User=new File("All.txt");
+
+        //specifying the format of date
+        DateTimeFormatter date_format = DateTimeFormatter.ofPattern("yyyy/MM/dd HH.mm.ss");  
+
+        //finding the current time
+        LocalDateTime now = LocalDateTime.now();  
+        String date = date_format.format(now);
+
+        File User = new File("All.txt");
+
+        //writing the username and current date on All.txt
         try 
         {   
-            FileWriter file=new FileWriter(User, true);
-            BufferedWriter usernamefile= new BufferedWriter(file);
-            usernamefile.write(username+":"+time+":"+date+":"+myPanel.Level+"\n");
-            usernamefile.close();
-             Scanner myReader = new Scanner(User);
+            FileWriter file_writer = new FileWriter(User, true);
+            BufferedWriter username_buffer_writer= new BufferedWriter(file_writer);
+            username_buffer_writer.write(username+":"+time+":"+date+":"+myPanel.Level+"\n");
+            username_buffer_writer.close();
+
+            //adding the information using scanner
+            Scanner myReader = new Scanner(User);
                while (myReader.hasNextLine())
                {
                     String data = myReader.nextLine();
-                    String[]data1=data.split(":");
+                    String[]data1 = data.split(":");
                     user1.add(data1[0]);
                     time1.add(data1[1]);
                     date1.add(data1[2]);
                     Level1.add(data1[3]);   
-                    numberOfprofile=numberOfprofile+1;
+                    numberOfprofile = numberOfprofile+1;
                }
         } 
         
@@ -84,9 +96,10 @@ public class Users
             JOptionPane.showMessageDialog(null, "Username File does'nt exist"); 
         }
   
+    //opening the result window by creating an instance of it
     Result result = new Result();
       
-     // adding action to our button
+     // adding action to our continue button in the result window
     result.continue_button.addActionListener(new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent e){

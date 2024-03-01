@@ -1,19 +1,9 @@
-rr:13.0:2022/07/12 03.48.19:kids  Mode-->play
-rr:6.0:2022/07/12 06.59.44:kids  Mode-->play
-a:-1.0:2024/02/25 16.41.34:kids  Mode-->Breadth First Search(BFS)
-ben:-1.0:2024/02/25 17.19.19:kids  Mode-->Depth First Search(DFS)
-ben:8.0:2024/02/25 17.19.58:kids  Mode-->play
-a:6.0:2024/02/28 22.25.54:kids  Mode-->play
-a:9.0:2024/02/28 22.29.08:kids  Mode-->play
-a:7.0:2024/02/28 22.29.38:kids  Mode-->play
-a:5.0:2024/02/28 22.30.20:kids  Mode-->Breadth First Search(BFS)
-a:0.0:2024/02/28 22.30.41:????  Mode-->??????
-a:0.0:2024/02/28 22.30.46:????  Mode-->????? ? ??????(BFS)
-a:2.0:2024/02/28 22.30.56:????  Mode-->????? ? ??????(BFS)
-a:3.0:2024/02/28 22.31.20:ni?os  Mode-->Jugar
-a:8.0:2024/02/28 22.39.26:kids  Mode-->Play
-a:3.0:2024/02/28 22.45.05:kids  Mode-->play
-a:11.0:2024/02/28 22.46.25:kids  Mode-->play
-a:25.0:2024/02/28 22.49.30:medium  Mode-->play
-a:0.0:2024/02/29 01.05.13:kids  Mode-->Depth First Search(DFS)
-a:-1.0:2024/03/01 21.13.52:Kinder  Mode-->Breitensuche zuerst(BFS)
+ab:-1.0:2024/03/01 21.44.08:kids  Mode-->Breadth First Search(BFS)
+AhmadMohsen:12.0:2024/03/01 21.49.12:ÈÑÇ? Èå åÇ  Mode-->ÈÇÒ?
+AhmadMohsen:8.0:2024/03/01 21.49.41:ÈÑÇ? Èå åÇ  Mode-->ÈÇÒ?
+ab:-1.0:2024/03/01 21.52.44:kids  Mode-->Breadth First Search(BFS)
+AhmadMohsen:6.0:2024/03/01 22.01.38:kids  Mode-->play
+ab:3.0:2024/03/01 22.02.11:kids  Mode-->play
+ab:7.0:2024/03/01 22.03.04:kids  Mode-->play
+ab:7.0:2024/03/01 22.21.37:kids  Mode-->play
+watter:3.0:2024/03/01 22.22.31:kids  Mode-->play
