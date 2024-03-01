@@ -45,4 +45,9 @@ public class myFrame extends JFrame implements KeyListener
 		return code; 	
 	}
 
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+	}
+
 }

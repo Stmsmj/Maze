@@ -77,7 +77,7 @@ public class SelectProfile extends javax.swing.JFrame
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(135, 70, 110, 26);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("mazebg.jpg"));
+        jLabel1.setIcon(new javax.swing.ImageIcon("src/main/java/image/mazebg.jpg"));
 
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 360, 425);

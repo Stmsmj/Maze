@@ -16,3 +16,4 @@ a:3.0:2024/02/28 22.45.05:kids  Mode-->play
 a:11.0:2024/02/28 22.46.25:kids  Mode-->play
 a:25.0:2024/02/28 22.49.30:medium  Mode-->play
 a:0.0:2024/02/29 01.05.13:kids  Mode-->Depth First Search(DFS)
+a:-1.0:2024/03/01 21.13.52:Kinder  Mode-->Breitensuche zuerst(BFS)

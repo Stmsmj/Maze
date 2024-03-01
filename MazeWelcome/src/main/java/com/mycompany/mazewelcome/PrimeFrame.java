@@ -134,7 +134,7 @@ public class PrimeFrame extends javax.swing.JFrame
         getContentPane().add(jLabel3);
         jLabel3.setBounds(170, 50, 300, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("prime.jpg"));
+        jLabel1.setIcon(new javax.swing.ImageIcon("src/main/java/image/prime.jpg"));
         getContentPane().add(jLabel1);
         jLabel1.setBounds(-3, 0, 610, 690);
 

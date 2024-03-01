@@ -108,7 +108,7 @@ public class CreateProfile extends javax.swing.JFrame
         back_button.setBounds(430, 320, 140, 40);
         
         //add image 
-        jLabel_img.setIcon(new javax.swing.ImageIcon("create.jpg"));
+        jLabel_img.setIcon(new javax.swing.ImageIcon("src/main/java/image/create.jpg"));
         getContentPane().add(jLabel_img);
         jLabel_img.setBounds(0, 0, 720, 470);
 
