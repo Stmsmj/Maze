@@ -23,7 +23,7 @@ public class myMaze
     private cells Start,End;
     private Queue<cells> Visited_Queue;
     private Stack<cells> VisitedS;
-    private int myCode;
+    private int myKeyCode;
 
     //the class constructor
     //gets maze size and cell size and finds number of cells
@@ -227,13 +227,15 @@ public class myMaze
         }
     }
 
+    
+    //the famous BFS algorithm for finding the path start to end
+
     public void mazeFinderBFS(Graphics g) 
     {
         Next = getOneNeighbor(current);
-        AtoB(current,Next);
+        AtoB_parent_child_setter(current,Next);
         if(Next == End) 
         {
-            System.out.println("Finished");
             finish = true;
             Path_Start_End();
             return;
@@ -258,25 +260,39 @@ public class myMaze
             }
         }
     }
+    /*
+     play mode method
+     this method respnsible for playing mode and 
+     gets Ascii code of pressed key
+     and passes it to move method to move the current cell
+     and updates some variables
+
+     more datails in method comments
+    */
     public void play(Graphics g) 
     {
-        myCode=myFrame.getCode();
-        Next = move(myCode,current);
+        //gets the Ascii code and move cell
+        myKeyCode=myFrame.getKeyCode();
+        Next = move(myKeyCode,current);
+
+        //if next cell is not null setts the parents and child to the cells
         if(Next!=null)
         {
             if(!Next.Visited_Path)
             {
-                AtoB(current, Next);;
+                AtoB_parent_child_setter(current, Next);
             }
         }
 
+        //if next cell is end cell finishes the play and sets the final path
         if(Next == End) 
         {
             finish = true;
-            Path_Start_End();;
+            Path_Start_End();
             return;
         }
 
+        //adding next cell to our explored path with these specified conditions
         if(Next != End && Next != null) 
         {
             if(!Paths_From_A_to_B.contains(Next) && Next!=Start && current!=Start)
@@ -290,21 +306,24 @@ public class myMaze
                 Paths_From_A_to_B.remove(current);
                 Paths_From_A_to_B.remove(Next);
             }
+
             Next.drawPath(g, Color.ORANGE);
             Next.Visited_Path = true;
-            current=Next;
+
+            current = Next;
             current.Draw_Box(g,new Color(120,180,180));
 
         }
 
+    //the famous DFS algorithm for finding the path start to end
     }
     public void mazeFinderDFS(Graphics g) 
     {
         Next = getOneNeighbor(current);
-        AtoB(current,Next);
+        AtoB_parent_child_setter(current,Next);
+
         if(Next == End) 
         {
-            System.out.println("Finished");
             finish = true;
             Path_Start_End();
             return;
@@ -332,6 +351,14 @@ public class myMaze
         }
     }
 
+
+    
+    /*
+    adds end cell to the final explored path
+    and then we use a while loop to set the all cell parents
+    till we reach the start cell to specifying answer path
+    */
+
     private void Path_Start_End() 
     {
         Paths_From_A_to_B.add(End);
@@ -344,7 +371,8 @@ public class myMaze
     }
 
 
-    private void AtoB(cells A,cells B) 
+    //specifies parent of B and the next cell (child) of A
+    private void AtoB_parent_child_setter(cells A,cells B) 
     {
         if(B!=null) 
         {
