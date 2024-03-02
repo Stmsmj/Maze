@@ -403,6 +403,20 @@ public class myMaze
             End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         }
 
+        else if(Start.row == End.row){
+
+            if((Start.col - 1 == End.col)||(Start.col == End.col - 1)){
+                End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
+            }
+        }
+        
+        else if(Start.col == End.col){
+
+            if((Start.row - 1 == End.row)||(Start.row == End.row - 1)){
+                End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
+            }
+        }
+
         for(int i = 0 ; i < number_of_cells ; i++) 
         {
             for(int j = 0 ; j < number_of_cells ; j++) 
