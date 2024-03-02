@@ -31,7 +31,7 @@ public class Users
     static  ArrayList<String>Level1=new ArrayList<>();
     static  int numberOfprofile = 0;
 
-    //initializing class constructor for adding
+    //initializing class constructor for adding the user
     public Users(String username) 
     {
         
