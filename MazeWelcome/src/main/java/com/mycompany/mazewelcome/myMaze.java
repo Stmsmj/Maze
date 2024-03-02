@@ -154,7 +154,6 @@ public class myMaze
 
 
     //algorithm for creating the maze
-
     /*
     this algorithm uses a stack for saving visited cells
     and while our stack is not empty randomly chooses
@@ -260,6 +259,9 @@ public class myMaze
             }
         }
     }
+
+
+
     /*
      play mode method
      this method respnsible for playing mode and 
@@ -352,7 +354,7 @@ public class myMaze
     }
 
 
-    
+
     /*
     adds end cell to the final explored path
     and then we use a while loop to set the all cell parents
@@ -383,6 +385,13 @@ public class myMaze
             A.Next.add(B);
     }
 
+
+
+    /*
+    this method randomly chooses start and end cells 
+    checks and prevent the wrong sitiuations
+    */
+
     public void initStartAndEnd() 
     {
 
@@ -394,9 +403,9 @@ public class myMaze
             End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         }
 
-        for(int i = 0;i<number_of_cells;i++) 
+        for(int i = 0 ; i < number_of_cells ; i++) 
         {
-            for(int j = 0;j<number_of_cells;j++) 
+            for(int j = 0 ; j < number_of_cells ; j++) 
             {
                 grids[i][j].Visited = false;
             }
@@ -405,19 +414,29 @@ public class myMaze
 
         Start.Visited = true;
         End.Visited = true;
+
         Visited_Queue = new LinkedList<cells>();
         VisitedS = new Stack<cells>();
+
         Paths_From_A_to_B = new ArrayList<cells>();
+
         current = Start;
         Next = current;
 
     }
+
+    /*
+    this method gets an Ascii code as keyCode and the current cell
+    moves the current cell by changing the cell with given keyCode
+    and returns new current cell
+    */
     public cells move(int keyCode,cells currentCell)
     {
-        cells myCell=null;
+        cells myCell = null;
+
         if(keyCode==87)
         {
-            if (currentCell.row-1 >= 0 &&  currentCell.Walls[0] == false) 
+            if (currentCell.row - 1 >= 0 &&  currentCell.Walls[0] == false) 
             {
                 myCell = grids[currentCell.row-1][currentCell.col];
             }
@@ -425,7 +444,7 @@ public class myMaze
 
         else if(keyCode==68)
         {
-            if (currentCell.col+1 < number_of_cells && currentCell.Walls[1] == false) 
+            if (currentCell.col + 1 < number_of_cells && currentCell.Walls[1] == false) 
             {
                 myCell = grids[currentCell.row][currentCell.col+1];
             }
@@ -441,7 +460,7 @@ public class myMaze
 
         else if(keyCode==65)
         {
-            if (currentCell.col-1 >= 0 && currentCell.Walls[3] == false) 
+            if (currentCell.col - 1 >= 0 && currentCell.Walls[3] == false) 
             {
                 myCell = grids[currentCell.row][currentCell.col-1];
             }
@@ -450,10 +469,20 @@ public class myMaze
         return  myCell;
 
     }
+
+
+    /*
+    this method gets the current cell 
+    and checks all possible neighbors and adds
+    valid neighbors to the neighbors array
+    if neighbors array is not empty 
+    returns the first naighbor in the array
+    */
     public cells getOneNeighbor(cells currentCell)
     {
         ArrayList<cells> neighbors = new ArrayList<>();
-        if (currentCell.row-1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited_Path == false && currentCell.Walls[0] == false)
+
+        if (currentCell.row - 1 >= 0 && grids[currentCell.row-1][currentCell.col].Visited_Path == false && currentCell.Walls[0] == false)
         {
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
@@ -475,9 +504,15 @@ public class myMaze
 
         if (neighbors.isEmpty())
             return null;
+
         return  neighbors.get(0);
     }
 
+
+    /*
+    Almost the  same with getOneNeighbor method
+    the difference is that it returns a random valid neighbor
+    */
     public cells getOneRandomNeighbor(cells currentCell) 
     {
         ArrayList<cells> neighbors = new ArrayList<>();
@@ -503,15 +538,27 @@ public class myMaze
 
         if (neighbors.isEmpty())
             return null;
+
         return  neighbors.get(new Random().nextInt(neighbors.size()));
     }
 
+    /*
+    this method gets the current cell 
+    and checks is there any neighbors or not
+    if there is , returns true
+    else returns false
+    */
     public boolean hasNeighbor(cells currentCell) 
     {
         if (getOneRandomNeighbor(currentCell)!=null)
             return true;
         return false;
     }
+
+    /*
+    this method gets two cells 
+    and removes the wall between those two cell
+    */
     public void wallBreaker(cells cellA,cells cellB) 
     {
         if (cellA.row == cellB.row+1) 
@@ -546,11 +593,13 @@ public class myMaze
 
     }
 
+    //a getter method that returnss the size of cell :-|
     public int getCellSize() 
     {
         return Cell_Size;
     }
 
+    //a setter that gets a cell size and assign it to cell_size variable
     public void setCellSize(int cellSize) 
     {
         Cell_Size = cellSize + 400;

@@ -40,7 +40,7 @@ public class myFrame extends JFrame implements KeyListener
 		code=1;
 	}
 
-	public static int getCode()
+	public static int getKeyCode()
 	{
 		return code; 	
 	}
