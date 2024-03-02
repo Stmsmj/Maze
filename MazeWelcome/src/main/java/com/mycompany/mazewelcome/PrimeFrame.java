@@ -166,13 +166,6 @@ public class PrimeFrame extends javax.swing.JFrame
         CreateProfile create_frame =  new CreateProfile();
         create_frame.setVisible(true);
 
-        create_frame.back_button.addActionListener(new java.awt.event.ActionListener() 
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt) 
-            {
-                create_frame.dispose();
-            }
-        });
     }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) 

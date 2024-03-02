@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 public class CreateProfile extends javax.swing.JFrame
 {
     static boolean Create=false;
-    JButton back_button = new javax.swing.JButton();
 
     //checking validation of username
     boolean checkvalid(String c)
@@ -98,15 +97,8 @@ public class CreateProfile extends javax.swing.JFrame
             }
         });
         getContentPane().add(create_button);
-        create_button.setBounds(150, 320, 140, 40);
-        getContentPane().add(create_button);
-        create_button.setBounds(150, 320, 140, 40);
+        create_button.setBounds(300, 320, 140, 40);
 
-        //initialize back button
-        back_button.setText("Back");
-        getContentPane().add(back_button);
-        back_button.setBounds(430, 320, 140, 40);
-        
         //add image 
         jLabel_img.setIcon(new javax.swing.ImageIcon("src/main/java/image/create.jpg"));
         getContentPane().add(jLabel_img);

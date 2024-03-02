@@ -26,7 +26,7 @@ public class myMaze
     private int myKeyCode;
 
     //the class constructor
-    //gets maze size and cell size and finds number of cells
+    //it gets maze size and cell size and finds number of cells in a column
     myMaze(int mazeSize,int cellSize)
     {
         Maze_Size = mazeSize;
@@ -49,7 +49,7 @@ public class myMaze
             }
         }
 
-        //randomly chooseng one cell as start point
+        //randomly choosing one cell as start point
         current = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         current.Visited = true;
 
@@ -74,7 +74,7 @@ public class myMaze
         finish = false;
     }
 
-    //this methode draws entire maze
+    //this method draws the entire maze
     // using Draw_box method implemented in cells.java
     public void drawMaze(Graphics g) 
     {
@@ -101,7 +101,7 @@ public class myMaze
         }
     }
 
-    //this methods by setting the running = false
+    //this method setts the running = false and
     //draws maze without showing the process
     public void drawMazeInstantly() 
     {
@@ -109,8 +109,8 @@ public class myMaze
         running = false;
     }
 
-    //this methode checks game mode and then
-    //passes graphic object g to neede method
+    //this method checks game mode and then
+    //passes graphic object g to the needed method
     public void drawPathFinder(Graphics g,int mode)
     {
         if(mode == 0)
@@ -156,7 +156,7 @@ public class myMaze
     //algorithm for creating the maze
     /*
     this algorithm uses a stack for saving visited cells
-    and while our stack is not empty randomly chooses
+    and while our stack is not empty , randomly chooses
     one neighbor cell and breaks the wall between them 
     using wallbreaker method implemented in cells.java
     */
@@ -184,12 +184,12 @@ public class myMaze
 
 
     /*
-    a recursion method that picks up a random neghbor
+    a recursion method that picks up a random neighbor
     and breaks wall between them
-    till there is new neighbor this will repeat
+    till there is new neighbor this will repeat ,
     when there is not new neighbor it pop a cell from stack
-    and checks possible neighbors to back to the first if block
-    if there is not any negobor at all running becomes false
+    and checks possible neighbors to back to the first 'if' block
+    if there is not any neigobor at all running becomes false
     and recursion flow will stop
     */
     public void update() 
@@ -273,7 +273,7 @@ public class myMaze
     */
     public void play(Graphics g) 
     {
-        //gets the Ascii code and move cell
+        //gets the Ascii code and moves the cell
         myKeyCode=myFrame.getKeyCode();
         Next = move(myKeyCode,current);
 
@@ -286,7 +286,7 @@ public class myMaze
             }
         }
 
-        //if next cell is end cell finishes the play and sets the final path
+        //if next cell is end cell , finishes the play and sets the final path
         if(Next == End) 
         {
             finish = true;
@@ -571,7 +571,7 @@ public class myMaze
 
     /*
     this method gets two cells 
-    and removes the wall between those two cell
+    and removes the wall between those two cells
     */
     public void wallBreaker(cells cellA,cells cellB) 
     {
@@ -607,7 +607,7 @@ public class myMaze
 
     }
 
-    //a getter method that returnss the size of cell :-|
+    //a getter method that returns the size of cell :-|
     public int getCellSize() 
     {
         return Cell_Size;
