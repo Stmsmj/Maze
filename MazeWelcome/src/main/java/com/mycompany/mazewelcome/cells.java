@@ -20,7 +20,7 @@ public class cells
     private int Stroke_Size;
     public boolean Visited_Path = false;
 
-    
+    //cells class constructor that creates new cell object
     cells(int row,int col,int Cell_Size)
     {
         this.row = row;
@@ -34,6 +34,7 @@ public class cells
         Stroke_Size = (int)((5.0/9 * ((Cell_Size/10)-1) )+1);
     }
 
+    //gets a graphic object and draws the cell by drawing walls around it
     public void Draw_Cell(Graphics g)
     {
         Graphics2D G2D = (Graphics2D) g;
