@@ -1,8 +1,9 @@
 package com.mycompany.mazewelcome;
 
-//importing needed modules
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
  //creating the Result class
 public class Result extends javax.swing.JFrame
@@ -13,10 +14,12 @@ public class Result extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     String [] columns = {"Username", "Time", "Date", "Level"};
 
+    public JButton continue_button = new JButton();
+    private JPanel continue_panel = new JPanel();
 
     DefaultTableModel model = new DefaultTableModel(columns,0);
 
-    //this func adds a new rows for each user
+    //this function adds a new row for each user
     public Result() 
     {
         for (int j = 0; j < Users.numberOfprofile; j++) 
@@ -24,7 +27,7 @@ public class Result extends javax.swing.JFrame
                 model.addRow(new String[]{Users.user1.get(j),Users.time1.get(j),Users.date1.get(j),Users.Level1.get(j)});
         }
 
-    this.setMinimumSize(new Dimension(300,350));
+    this.setMinimumSize(new Dimension(300,430));
     initComponents();
     this.setVisible(true);
 
@@ -38,8 +41,6 @@ public class Result extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
 
-    
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //initializing the table
         Table.setBackground(new java.awt.Color(0, 255, 255));
@@ -49,8 +50,15 @@ public class Result extends javax.swing.JFrame
         jScrollPane1.setViewportView(Table);
 
 
+        //adding continue panel and button
+        continue_panel.setBounds(300, 350, 100, 100);
+        continue_button.setText("continue");
+        continue_panel.add(continue_button);
+        getContentPane().add(continue_panel);
+
+
+
         //setting the layout of the components
-        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

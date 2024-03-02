@@ -98,7 +98,7 @@ public class CreateProfile extends javax.swing.JFrame
             }
         });
 
-        getContentPane().add(create_button);
+        getContentPane().add(create_button);    // adding create button to ContentPane and setting its configuration
         create_button.setBounds(300, 320, 140, 40);
         
         //add image 

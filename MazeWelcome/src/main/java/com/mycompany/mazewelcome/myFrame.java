@@ -46,7 +46,5 @@ public class myFrame extends JFrame implements KeyListener
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-	}
-
+	public void keyTyped(KeyEvent arg0) {}
 }

@@ -49,7 +49,7 @@ public class myMaze
             }
         }
 
-        //randomly chooseng one cell as start point
+        //randomly choosing one cell as start point
         current = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         current.Visited = true;
 
@@ -74,7 +74,7 @@ public class myMaze
         finish = false;
     }
 
-    //this methode draws entire maze
+    // this methode draws entire maze
     // using Draw_box method implemented in cells.java
     public void drawMaze(Graphics g) 
     {
@@ -88,7 +88,7 @@ public class myMaze
         }
     }
 
-    //this method checks the runnig mode is on
+    //this method checks if runnig mode is on
     //and then paints the current cell and updates
     public void mazeAlgorithm(Graphics g) 
     {

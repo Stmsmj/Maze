@@ -88,12 +88,21 @@ public class Users
         
         catch (IOException e) 
         {
-            JOptionPane.showMessageDialog(null, "Username File does'nt exist"); 
+            JOptionPane.showMessageDialog(null, "Username File doesn't exist"); 
         }
   
         //opening the result window by creating an instance of it
         Result result = new Result();
       
+        // adding action to our continue button in the result window
+        result.continue_button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                result.dispose();
+            }
+        });
     }
 }
     

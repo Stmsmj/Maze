@@ -37,7 +37,7 @@ public class SelectProfile extends javax.swing.JFrame
 
         catch (FileNotFoundException e)   // show error if there isnt any profile
         {
-            JOptionPane.showMessageDialog(rootPane, "please creat profile","Error",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "please create a profile","Error",JOptionPane.WARNING_MESSAGE);
         }
 
         Allprofile2=Allprofile.toArray(Allprofile2); 
@@ -89,7 +89,7 @@ public class SelectProfile extends javax.swing.JFrame
     {
         UsernameInall=Profile_comboBox.getSelectedItem().toString();    // getting the profile name user chose
         Select=true;
-        JOptionPane.showMessageDialog(rootPane, " you select"+" "+UsernameInall+ "!", "Succsfuly selected", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(rootPane, " you selected"+" "+UsernameInall+ "!", "Successfully selected", JOptionPane.INFORMATION_MESSAGE);
                 
         this.setVisible(false);
 

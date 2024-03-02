@@ -7,7 +7,7 @@ public class Main
 
         try 
         {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) // for making widgets look better
             {
                 if ("Nimbus".equals(info.getName())) 
                 {
