@@ -1,13 +1,8 @@
 package com.mycompany.mazewelcome;
 
-import javax.swing.border.LineBorder;
-import javax.swing.table.*;
+//importing needed modules
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -17,16 +12,20 @@ import javax.swing.JPanel;
  * @author ae
  */
 
+ //creating the Result class
 public class Result extends javax.swing.JFrame
 {
+
+    //initializing variables
 
     String [] columns = {"Username", "Time", "Date", "Level"};
 
     public JButton continue_button = new JButton();
     private JPanel continue_panel = new JPanel();
 
-    DefaultTableModel model=new DefaultTableModel(columns,0);
+    DefaultTableModel model = new DefaultTableModel(columns,0);
 
+    //this func adds a new rows for each user
     public Result() 
     {
         for (int j = 0; j < Users.numberOfprofile; j++) 
@@ -35,13 +34,13 @@ public class Result extends javax.swing.JFrame
         }
 
     this.setMinimumSize(new Dimension(300,430));
-        initComponents();
+    initComponents();
     this.setVisible(true);
 
     }
     
 
-    @SuppressWarnings("unchecked")
+    //initializing needed components
     private void initComponents() 
     {
 
@@ -51,7 +50,7 @@ public class Result extends javax.swing.JFrame
     
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-
+        //initializing the table
         Table.setBackground(new java.awt.Color(0, 255, 255));
         Table.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(51, 0, 255), new java.awt.Color(0, 255, 255)));
         Table.setForeground(new java.awt.Color(255, 0, 0));
@@ -67,26 +66,27 @@ public class Result extends javax.swing.JFrame
 
 
 
+        //setting the layout of the components
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE));
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE));
 
 
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE));
-
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337,
+        javax.swing.GroupLayout.PREFERRED_SIZE));
 
         pack();
     }
 
-    /**
-     * @param args 
-     */
+    
+
     public static void main(String args[]) 
     {
+         //not necessary but suggested code for handling the possible errors
+
         try 
         {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
