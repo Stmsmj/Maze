@@ -1,10 +1,5 @@
 package com.mycompany.mazewelcome;
 
-/**
- *
- * @author ae
- */
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;

@@ -1,19 +1,18 @@
 package com.mycompany.mazewelcome;
 
-/**
- *
- * @author ae
- */
+//importing needed modules
 import java.awt.*;
 import java.util.*;
 
+//creating myMaze class
 public class myMaze
 {
-    public boolean finish = false;
 
+    //initializing the variabels
+    public boolean finish = false;
     private final int Maze_Size;
     private int Cell_Size;
-    private final int w ;
+    private final int number_of_cells ;
     private cells[][] grids;
     private cells current;
     private cells Next;
@@ -26,35 +25,48 @@ public class myMaze
     private Stack<cells> VisitedS;
     private int myCode;
 
+    //the class constructor
+    //gets maze size and cell size and finds number of cells
     myMaze(int mazeSize,int cellSize)
     {
         Maze_Size = mazeSize;
         Cell_Size = cellSize;
-        w = (int)(Maze_Size/Cell_Size);
+        number_of_cells = (int)(Maze_Size/Cell_Size);
         init();
     }
 
+    //initializing the maze
     private void init() 
     {
-        grids = new cells[w][w];
-        for (int row=0;row<w;row++)
+        grids = new cells[number_of_cells][number_of_cells];
+
+        //add cell object on entire grid
+        for (int row=0;row<number_of_cells;row++)
          {
-            for (int col =0;col<w;col++) 
+            for (int col =0;col<number_of_cells;col++) 
             {
                 grids[row][col] = new cells(row,col,Cell_Size);
             }
         }
-        current = grids[new Random().nextInt(w)][new Random().nextInt(w)];
+
+        //randomly chooseng one cell as start point
+        current = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         current.Visited = true;
+
+        //initilizing the visited stack
         Visited_Stack = new Stack<cells>();
+
         running = true;
 
     }
+
+    //resets the maze by resetting the all cells
+    //using Reset_cell method , implemented in cells.java
     public void resetMaze()
     {
-        for (int row=0;row<w;row++) 
+        for (int row = 0; row < number_of_cells;row++) 
         {
-            for (int col =0;col<w;col++)
+            for (int col =0;col<number_of_cells;col++)
             {
                 grids[row][col].Reset_Cell();
             }
@@ -62,33 +74,43 @@ public class myMaze
         finish = false;
     }
 
+    //this methode draws entire maze
+    // using Draw_box method implemented in cells.java
     public void drawMaze(Graphics g) 
     {
-        for(int i = 0;i<w;i++) 
+        for(int i = 0;i<number_of_cells;i++) 
         {
-            for(int j = 0;j<w;j++) 
+            for(int j = 0;j<number_of_cells;j++) 
             {
                 grids[i][j].Draw_Box(g, new Color(110,206,200,250));
                 grids[i][j].Draw_Cell(g);
             }
         }
     }
+
+    //this method checks the runnig mode is on
+    //and then paints the current cell and updates
     public void mazeAlgorithm(Graphics g) 
     {
         if(running) 
         {
-            if(Count_Visited<=w*w)
+            if(Count_Visited <= number_of_cells*number_of_cells)
                 current.Draw_Box(g,new Color(0,255,0,100));
             update();
-            System.out.println(Count_Visited);
+
         }
     }
+
+    //this methods by setting the running = false
+    //draws maze without showing the process
     public void drawMazeInstantly() 
     {
         mazeAlgorithm();
         running = false;
     }
 
+    //this methode checks game mode and then
+    //passes graphic object g to neede method
     public void drawPathFinder(Graphics g,int mode)
     {
         if(mode == 0)
@@ -99,24 +121,30 @@ public class myMaze
             mazeFinderDFS(g);
         }
 
-        for(cells x: Paths_From_A_to_B) 
+        //draws path with white line
+        for(cells c: Paths_From_A_to_B) 
         {
-            x.drawPath(g, Color.WHITE);
+            c.drawPath(g, Color.WHITE);
         }
 
+        //setting color for start ans end cell
+        //green for the start cell and red for the end cell
         Start.Draw_Box(g,new Color(0, 250, 0));
         End.Draw_Box(g,new Color(250, 0, 0));
 
 
-        for(int i = 0;i<w;i++) 
+        //draws entire grid for starting the solve
+        for(int i = 0 ; i < number_of_cells;i++) 
         {
-            for(int j = 0;j<w;j++) 
+            for(int j = 0 ; j < number_of_cells ; j++) 
             {
                 grids[i][j].Draw_Cell(g);
             }
         }
 
     }
+
+    //checks creating the maze finished or not
     public boolean checkFinished()
     {
         if (running)
@@ -124,14 +152,26 @@ public class myMaze
         return true;
     }
 
+
+    //algorithm for creating the maze
+
+    /*
+    this algorithm uses a stack for saving visited cells
+    and while our stack is not empty randomly chooses
+    one neighbor cell and breaks the wall between them 
+    using wallbreaker method implemented in cells.java
+    */
+
     public void mazeAlgorithm() 
     {
-        Stack<cells> VisitedList = new Stack<>();
+        Stack <cells> VisitedList = new Stack<>();
         current.Visited = true;
         VisitedList.push(current);
+
         while(!VisitedList.isEmpty()) 
         {
             current = VisitedList.pop();
+
             if (hasNeighbor(current)) 
             {
                 VisitedList.push(current);
@@ -143,6 +183,16 @@ public class myMaze
         }
     }
 
+
+    /*
+    a recursion method that picks up a random neghbor
+    and breaks wall between them
+    till there is new neighbor this will repeat
+    when there is not new neighbor it pop a cell from stack
+    and checks possible neighbors to back to the first if block
+    if there is not any negobor at all running becomes false
+    and recursion flow will stop
+    */
     public void update() 
     {
         if (running == false)
@@ -172,6 +222,7 @@ public class myMaze
                     return;
                 }
             }
+
             update();
         }
     }
@@ -307,17 +358,17 @@ public class myMaze
     public void initStartAndEnd() 
     {
 
-        Start = grids[new Random().nextInt(w)][new Random().nextInt(w)];
-        End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
+        Start = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
+        End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
 
         if (Start == End)
         {
-            End = grids[new Random().nextInt(w)][new Random().nextInt(w)];
+            End = grids[new Random().nextInt(number_of_cells)][new Random().nextInt(number_of_cells)];
         }
 
-        for(int i = 0;i<w;i++) 
+        for(int i = 0;i<number_of_cells;i++) 
         {
-            for(int j = 0;j<w;j++) 
+            for(int j = 0;j<number_of_cells;j++) 
             {
                 grids[i][j].Visited = false;
             }
@@ -346,7 +397,7 @@ public class myMaze
 
         else if(keyCode==68)
         {
-            if (currentCell.col+1 < w && currentCell.Walls[1] == false) 
+            if (currentCell.col+1 < number_of_cells && currentCell.Walls[1] == false) 
             {
                 myCell = grids[currentCell.row][currentCell.col+1];
             }
@@ -354,7 +405,7 @@ public class myMaze
 
         else if(keyCode==83)
         {
-            if (currentCell.row + 1 < w && currentCell.Walls[2] == false) 
+            if (currentCell.row + 1 < number_of_cells && currentCell.Walls[2] == false) 
             {
                 myCell = grids[currentCell.row+1][currentCell.col];
             }
@@ -379,12 +430,12 @@ public class myMaze
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
 
-        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited_Path == false && currentCell.Walls[1] == false) 
+        if (currentCell.col+1 < number_of_cells && grids[currentCell.row][currentCell.col+1].Visited_Path == false && currentCell.Walls[1] == false) 
         {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
 
-        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited_Path == false && currentCell.Walls[2] == false) 
+        if (currentCell.row + 1 < number_of_cells && grids[currentCell.row+1][currentCell.col].Visited_Path == false && currentCell.Walls[2] == false) 
         {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
@@ -407,12 +458,12 @@ public class myMaze
             neighbors.add(grids[currentCell.row-1][currentCell.col]);
         }
 
-        if (currentCell.col+1 < w && grids[currentCell.row][currentCell.col+1].Visited == false) 
+        if (currentCell.col+1 < number_of_cells && grids[currentCell.row][currentCell.col+1].Visited == false) 
         {
             neighbors.add(grids[currentCell.row][currentCell.col+1]);
         }
 
-        if (currentCell.row + 1 < w && grids[currentCell.row+1][currentCell.col].Visited == false) 
+        if (currentCell.row + 1 < number_of_cells && grids[currentCell.row+1][currentCell.col].Visited == false) 
         {
             neighbors.add(grids[currentCell.row+1][currentCell.col]);
         }
