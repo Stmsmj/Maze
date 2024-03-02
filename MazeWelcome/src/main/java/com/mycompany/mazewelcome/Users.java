@@ -1,10 +1,5 @@
 package com.mycompany.mazewelcome;
 
-/**
- *
- * @author ae
- */
-
  //importing needed modules
 import java.awt.event.*;
 import java.io.BufferedWriter;
@@ -96,20 +91,19 @@ public class Users
             JOptionPane.showMessageDialog(null, "Username File does'nt exist"); 
         }
   
-    //opening the result window by creating an instance of it
-    Result result = new Result();
+        //opening the result window by creating an instance of it
+        Result result = new Result();
       
-     // adding action to our continue button in the result window
-    result.continue_button.addActionListener(new ActionListener(){
-        @Override
-        public void actionPerformed(ActionEvent e){
+        // adding action to our continue button in the result window
+        result.continue_button.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
                 result.dispose();
             }
         });
-
     }
-
-
 }
     
     

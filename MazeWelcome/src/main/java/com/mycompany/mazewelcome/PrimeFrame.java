@@ -131,19 +131,7 @@ public class PrimeFrame extends javax.swing.JFrame
     // actions to perform if user pressed create button
     private void createActionPerformed(java.awt.event.ActionEvent evt) 
     {
-        CreateProfile create_frame =  new CreateProfile();
-        create_frame.setVisible(true);
-
-<<<<<<< HEAD
-=======
-        create_frame.back_button.addActionListener(new java.awt.event.ActionListener() // adding actionListener for back_button button for function
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt) 
-            {
-                create_frame.dispose();
-            }
-        });
->>>>>>> 97feb17b8534a4be0b7c84c2a4d94bc998c2db20
+        new CreateProfile().setVisible(true);
     }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) 
@@ -158,7 +146,7 @@ public class PrimeFrame extends javax.swing.JFrame
         {
             UserListIsEmpty = true;
         }
-        
+
         else
         {
             UserListIsEmpty=false;

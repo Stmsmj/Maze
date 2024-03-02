@@ -6,18 +6,13 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-/**
- *
- * @author ae
- */
-
  //creating the Result class
 public class Result extends javax.swing.JFrame
 {
 
     //initializing variables
-
+    private javax.swing.JTable Table;
+    private javax.swing.JScrollPane jScrollPane1;
     String [] columns = {"Username", "Time", "Date", "Level"};
 
     public JButton continue_button = new JButton();
@@ -80,48 +75,5 @@ public class Result extends javax.swing.JFrame
 
         pack();
     }
-
-    
-
-    public static void main(String args[]) 
-    {
-         //not necessary but suggested code for handling the possible errors
-
-        try 
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
-            {
-                if ("Nimbus".equals(info.getName())) 
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } 
-        
-        catch (ClassNotFoundException ex) 
-        {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-        
-        catch (InstantiationException ex) 
-        {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-        
-        catch (IllegalAccessException ex) 
-        {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-        
-        catch (javax.swing.UnsupportedLookAndFeelException ex) 
-        {
-            java.util.logging.Logger.getLogger(Result.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-    }
-
-    private javax.swing.JTable Table;
-    private javax.swing.JScrollPane jScrollPane1;
 }
 

@@ -9,13 +9,15 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author ae
- */
 
 public class CreateProfile extends javax.swing.JFrame
 {
+    private javax.swing.JTextField UsernameTxtfield;
+    private javax.swing.JButton create_button;
+    private javax.swing.JLabel jLabel_create_profile;
+    private javax.swing.JLabel jLabel_username;
+    private javax.swing.JLabel jLabel_img;
+
     static boolean Create=false;
 
     //checking validation of username
@@ -48,7 +50,6 @@ public class CreateProfile extends javax.swing.JFrame
         jLabel_img = new javax.swing.JLabel();
 
         //set the default size of create profile window
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(720, 472));
         setMinimumSize(new java.awt.Dimension(720, 172));
         setPreferredSize(new java.awt.Dimension(720, 472));
@@ -96,9 +97,10 @@ public class CreateProfile extends javax.swing.JFrame
                 createActionPerformed(evt);
             }
         });
+
         getContentPane().add(create_button);
         create_button.setBounds(300, 320, 140, 40);
-
+        
         //add image 
         jLabel_img.setIcon(new javax.swing.ImageIcon("src/main/java/image/create.jpg"));
         getContentPane().add(jLabel_img);
@@ -150,56 +152,4 @@ public class CreateProfile extends javax.swing.JFrame
             JOptionPane.showMessageDialog(rootPane, "The username shouldn't be empty and shoud not include(.,;:!?)  ", "eror", JOptionPane.WARNING_MESSAGE);
         }
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) 
-    {
-        try 
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) 
-            {
-                if ("Nimbus".equals(info.getName())) 
-                {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } 
-
-        catch (ClassNotFoundException ex) 
-        {
-            java.util.logging.Logger.getLogger(CreateProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-        catch (InstantiationException ex) 
-        {
-            java.util.logging.Logger.getLogger(CreateProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-        catch (IllegalAccessException ex) 
-        {
-            java.util.logging.Logger.getLogger(CreateProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-        catch (javax.swing.UnsupportedLookAndFeelException ex) 
-        {
-            java.util.logging.Logger.getLogger(CreateProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            public void run() 
-            {
-                new CreateProfile().setVisible(true);
-            }
-        });
-    }
-
-    private javax.swing.JTextField UsernameTxtfield;
-    private javax.swing.JButton create_button;
-    private javax.swing.JLabel jLabel_create_profile;
-    private javax.swing.JLabel jLabel_username;
-    private javax.swing.JLabel jLabel_img;
 }
