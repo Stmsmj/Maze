@@ -2,7 +2,6 @@ package com.mycompany.mazewelcome;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.security.AllPermission;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.DefaultComboBoxModel;
@@ -44,7 +43,7 @@ public class SelectProfile extends javax.swing.JFrame
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+    
     private void initComponents() 
     {
 

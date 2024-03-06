@@ -1,12 +1,9 @@
 package com.mycompany.mazewelcome;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 
@@ -39,7 +36,7 @@ public class CreateProfile extends javax.swing.JFrame
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+    
     private void initComponents() 
     {
         //init needed components
@@ -130,7 +127,7 @@ public class CreateProfile extends javax.swing.JFrame
 
             catch (FileNotFoundException e) 
             {
-                JOptionPane.showMessageDialog(null, "nemishe");
+                JOptionPane.showMessageDialog(null, "FileNotFoundException");
             } 
 
             if(chekexist==false)
@@ -143,13 +140,13 @@ public class CreateProfile extends javax.swing.JFrame
 
             else
             { 
-                JOptionPane.showMessageDialog(rootPane, "The Profile alreay exist", "eror", JOptionPane.WARNING_MESSAGE); 
+                JOptionPane.showMessageDialog(rootPane, "The Profile alreay exist", "ERror", JOptionPane.WARNING_MESSAGE); 
             }
         }
         
         else
         {
-            JOptionPane.showMessageDialog(rootPane, "The username shouldn't be empty and shoud not include(.,;:!?)  ", "eror", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "The username shouldn't be empty and should not include(.,;:!?)  ", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

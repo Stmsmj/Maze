@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -24,7 +25,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
     private int Switch_Case_Var = 0;
     private myMaze maze;
-    private Timer tm;
+    private Timer timer;
 
     private JPanel Small_Panel;
     private myButton Start_Button;
@@ -47,7 +48,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
     private myButton Start_Solving_Button;
     private boolean flag = true;
-    private myTimer t;
+    private myTimer my_timer;
     private JLabel timerLabel;
 
     // configuring the main panel
@@ -56,7 +57,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
         this.Window_W = Window_W;
         this.Window_H = Window_H;
 
-        tm = new Timer(delay,this);
+        timer = new Timer(delay,this);
         
         // configuration of maze panel
         this.setPreferredSize(new Dimension(Window_W,Window_H));
@@ -73,11 +74,11 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
 
         // timer widget and its configuraion
-        t = new myTimer();
+        my_timer = new myTimer();
         timerLabel =new JLabel("Timer : ");
         timerLabel.setBounds(100,500,100,100);
         Small_Panel.add(timerLabel);
-        t.setLabel(timerLabel);
+        my_timer.setLabel(timerLabel);
 
 
         // start button and its configuration
@@ -197,7 +198,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
 
         initMaze();
-        tm.start();
+        timer.start();
     }
 
     // make a new checkered maze base with its new (if there is any) settings
@@ -247,8 +248,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setEnabled(true);
                 Speed_Slider.setEnabled(true);
 
-                tm.stop();
-                t.pause();
+                timer.stop();
+                my_timer.pause();
 
                 Mode=algoBox.getSelectedItem().toString();
                 Level=DifficultyBox.getSelectedItem().toString() + "  " +"Mode-->"+Mode;
@@ -282,7 +283,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
     // reset time and enable some widgets and call repaint
     private void reset() 
     {
-        tm.start();
+        timer.start();
         running = -1;
         Start_Button.setEnabled(true);
         DifficultyBox.setEnabled(true);
@@ -295,6 +296,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
     {
         if (e.getSource()==Language_box) 
         {
+            
             if (Language_box.getSelectedIndex()==3) // japanese
             {
                 DifficultyBox.removeItemAt(0);
@@ -302,6 +304,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+    
                 DifficultyBox.addItem("子供");
                 DifficultyBox.addItem("中くらい");
                 DifficultyBox.addItem("難しい");
@@ -325,18 +328,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("再び迷路");
                 Start_Button.setText("始める");
 
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
 
             }
 
@@ -347,6 +338,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+     
                 DifficultyBox.addItem("kids");
                 DifficultyBox.addItem("medium");
                 DifficultyBox.addItem("hard");
@@ -370,18 +362,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("Re-Maze");
                 Start_Button.setText("Start");
 
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
-                Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                Reset_Button.setFont(new Font("MV Boli",Font.BOLD,13));
-                Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
-                Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
             }
 
             else if(Language_box.getSelectedIndex()==1) // french
@@ -391,6 +371,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+    
                 DifficultyBox.addItem("des gamins");
                 DifficultyBox.addItem("moyen");
                 DifficultyBox.addItem("dur");
@@ -414,18 +395,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("dédale à nouveau");
                 Start_Button.setText("Commencer");
 
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox.setFont(new Font("MV Boli",Font.BOLD,12));
-                algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
-                Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,13));
-                Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,14));
-                Reset_Button.setFont(new Font("MV Boli",Font.BOLD,13));
-                Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
-                Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
+               
             }
             
             else if (Language_box.getSelectedIndex()==2) // German
@@ -435,12 +405,14 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+      
                 DifficultyBox.addItem("Kinder");
                 DifficultyBox.addItem("Mittel");
                 DifficultyBox.addItem("schwer");
                 DifficultyBox.addItem("Legenden");
                 DifficultyBox.addItem("Gott Modus");
 
+                
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
                 algoBox.removeItemAt(0);
@@ -458,18 +430,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("Labyrinth wieder");
                 Start_Button.setText("Anfang");
 
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
-                Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                Reset_Button.setFont(new Font("MV Boli",Font.BOLD,12));
-                Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
-                Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
             }
             
             else if (Language_box.getSelectedIndex()==4) // spanish
@@ -479,6 +439,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+    
                 DifficultyBox.addItem("niños");
                 DifficultyBox.addItem("medio");
                 DifficultyBox.addItem("Duro");
@@ -502,18 +463,6 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("laberinto de nuevo");
                 Start_Button.setText("comienzo");
 
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                algoBox.setFont(new Font("MV Boli",Font.BOLD,13));
-                algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
-                Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,13));
-                Reset_Button.setFont(new Font("MV Boli",Font.BOLD,12));
-                Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
-                Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
-                Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
             }
             
             else if (Language_box.getSelectedIndex()==5) // russian
@@ -523,6 +472,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+    
                 DifficultyBox.addItem("Дети");
                 DifficultyBox.addItem("средний");
                 DifficultyBox.addItem("жесткий");
@@ -546,27 +496,18 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("Лабиринт снова");
                 Start_Button.setText("Начинать");
 
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,12));
-                Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-            }
+               }
             
             else if (Language_box.getSelectedIndex()==6) // فارسی
             {
+
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(1);
                 DifficultyBox.removeItemAt(2);
                 DifficultyBox.removeItemAt(0);
                 DifficultyBox.removeItemAt(0);
+
+                
                 DifficultyBox.addItem("برای بچه ها");
                 DifficultyBox.addItem("متوسط");
                 DifficultyBox.addItem("سخت");
@@ -590,19 +531,40 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                 reMaze_Button.setText("ساخت مجدد ماز ");
                 Start_Button.setText("شروع");
 
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
-                Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,12));
-                Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
-                Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
-                Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
             }
+        }
+
+        //setting font for different languages
+        if((Language_box.getSelectedIndex()==6)||(Language_box.getSelectedIndex()==5)||(Language_box.getSelectedIndex()==3)){
+
+            DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            algoBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            algoBox_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+            Speed_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,18));
+            Maze_CheckBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,12));
+            Start_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            reMaze_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            Reset_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,13));
+            Start_Solving_Button.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            DifficultyBox.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            Cell_Label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+            Language_label.setFont(new Font("TRUETYPE_FONT",Font.BOLD,15));
+
+            
+        }else{
+
+            DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+            algoBox.setFont(new Font("MV Boli",Font.BOLD,12));
+            algoBox_Label.setFont(new Font("MV Boli",Font.BOLD,13));
+            Speed_Label.setFont(new Font("MV Boli",Font.BOLD,18));
+            Maze_CheckBox.setFont(new Font("MV Boli",Font.BOLD,13));
+            Start_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+            reMaze_Button.setFont(new Font("MV Boli",Font.BOLD,14));
+            Reset_Button.setFont(new Font("MV Boli",Font.BOLD,13));
+            Start_Solving_Button.setFont(new Font("MV Boli",Font.BOLD,15));
+            DifficultyBox.setFont(new Font("MV Boli",Font.BOLD,15));
+            Cell_Label.setFont(new Font("MV Boli",Font.BOLD,15));
+            Language_label.setFont(new Font("MV Boli",Font.BOLD,15));
         }
 
         if(e.getSource()==reMaze_Button) // actions that will happen if reMaze button is pressed
@@ -611,7 +573,9 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
             Maze_CheckBox.setEnabled(true);
             reMaze_Button.setEnabled(false);
             Speed_Slider.setEnabled(true);
-            t.reset();
+
+            my_timer.reset();
+        
             initMaze();
             reset();
 
@@ -658,6 +622,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
         if (e.getSource()==Start_Button) 
         {
             DifficultyBox.setEnabled(false);
+            Maze_CheckBox.setEnabled(false);
             running *= -1;
             if(running == 1)
             {
@@ -747,7 +712,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
         // actions that game going to perform if player click on Start button for solving maze
         if(e.getSource() == Start_Solving_Button) 
         {
-            t.start();
+            my_timer.start();
             Maze_CheckBox.setSelected(false);
             Maze_CheckBox.setEnabled(false);
             Speed_Slider.setEnabled(false);
@@ -755,7 +720,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
 
             if(mode==0)
             {
-                tm.setDelay(150);
+                timer.setDelay(150);
             }
 
             if(flag) 
@@ -770,8 +735,8 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
         {
             flag = true;
             maze.resetMaze();
-            tm.start();
-            t.reset();
+            timer.start();
+            my_timer.reset();
         }
 
 
@@ -878,7 +843,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                     Start_Button.setText("شروع");
                 }
 
-                Cell_Size = 70;
+                Cell_Size = 60;
                 flag = true;
                 initMaze();
                 reset();
@@ -930,7 +895,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
                     Start_Button.setText("شروع");
                 }
                 
-                Cell_Size = 50;
+                Cell_Size = 40;
                 flag = true;
                 initMaze();
                 reset();
@@ -1086,8 +1051,7 @@ public class myPanel extends JPanel implements ActionListener,ChangeListener
             }
 
             delay = Slowest_Delay - (Speed_Slider.getValue()-1)* ((Slowest_Delay-5)/5) ;
-            tm.setDelay(delay);
-            System.out.println(delay);
+            timer.setDelay(delay);
 
         }
     }

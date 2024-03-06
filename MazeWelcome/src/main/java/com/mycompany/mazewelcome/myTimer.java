@@ -71,6 +71,7 @@ public class myTimer
     //used in myPanel line 621
     public void reset(){
 
+        pause();
         second = 0;
         minute = 0;
         timer = new Timer();

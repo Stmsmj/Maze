@@ -1,10 +1,6 @@
 package com.mycompany.mazewelcome;
 
-
-import java.awt.*;
 import java.io.File;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
@@ -24,7 +20,7 @@ public class PrimeFrame extends javax.swing.JFrame
     }
 
 
-    @SuppressWarnings("unchecked")
+    
     private void initComponents() 
     {
         Start = new javax.swing.JButton();

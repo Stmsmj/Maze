@@ -1,7 +1,7 @@
 package com.mycompany.mazewelcome;
 
  //importing needed modules
-import java.awt.event.*;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
