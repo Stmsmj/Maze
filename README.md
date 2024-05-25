@@ -55,7 +55,18 @@ in this mode you control the game
 
 you should start from green block and reach the red block
 
->[]
+> [!IMPORTANT]
+> to move you should use ```w , s , a , d``` keys
+> 
+> ```w : up``` 
+> ```s : down``` 
+> ```d : right``` 
+> ```a : left``` 
+
+Video
+
+#### BFS
+this mode uses the BFS algorithm to find the path between start to end
 
 
 
