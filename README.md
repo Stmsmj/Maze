@@ -49,7 +49,7 @@ there is 5 difficulties , the easiest is `Kids mode` and the hardest is `God mod
 after slecting the difficulty and language you are ready to generate the maze
 
 >[!TIP]
->you can use the `Generate instantly` button to skip maze generating process
+>you can use the `Generate instantly` to skip maze generating process
 
 >[!TIP]
 >you can use the `speed bar` to control thee speed of generating process 
@@ -58,7 +58,7 @@ Video
 
 
 ### Modes
-the goal is simple , we should start from `green block` to the `red block`
+the goal is simple , we should start from `green block` to reach the `red block`
 
 There is 3 different modes
 
