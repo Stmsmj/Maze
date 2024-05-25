@@ -54,7 +54,8 @@ after slecting the difficulty and language you are ready to generate the maze
 >[!TIP]
 >you can use the `speed bar` to control thee speed of generating process 
 
-Video
+
+https://github.com/Stmsmj/Maze/assets/105553956/9177421a-778f-46dd-8205-5693223ea293
 
 
 ### Modes
@@ -75,7 +76,11 @@ you should start from green block and reach the red block
 > ```d : right``` 
 > ```a : left``` 
 
-Video
+
+
+https://github.com/Stmsmj/Maze/assets/105553956/d7e520f2-1349-429e-9e95-a73fa95ee88b
+
+
 
 #### BFS
 this mode uses the BFS algorithm to find the path between start to end
@@ -84,7 +89,11 @@ you should just watch the computer play and enjoy
 
 more information about [BFS algorithm](https://en.wikipedia.org/wiki/Breadth-first_search)
 
-Video
+
+
+https://github.com/Stmsmj/Maze/assets/105553956/e2d288a6-72da-4d35-9348-1642ca7e14ac
+
+
 
 #### DFS
 this mode uses the DFS algorithm to find the path between start to end
@@ -93,10 +102,17 @@ in this mode also you will just watch and enjoy
 
 more information about [DFS algorithm](https://en.wikipedia.org/wiki/Depth-first_search)
 
-Video
+
+
+https://github.com/Stmsmj/Maze/assets/105553956/648254bc-47d5-4ce3-8c92-7eb75a5f11f1
+
+
 
 # 
-if you like feel free to fork the repo and contributing.
+
+if you need more information about the coude checkout the wiki
+
+and feel free to fork the repo and contributing.
 
 # Contributers
 * [Mehrdad Aramesh](https://github.com/MisterCalm)
