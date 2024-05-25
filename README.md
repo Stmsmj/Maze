@@ -95,10 +95,10 @@ Video
 if you like feel free to fork the repo and contributing.
 
 # Contributers
-* [Mehrdad Aramesh]()
-* [Stmsmj]()
-* [Ali Saadati]()
-* [Amirhossein Aminnegareshi]()
-* [Amirhossein Amjadian]()
-* [Hossein Atalou]()
+* [Mehrdad Aramesh](https://github.com/MisterCalm)
+* [Stmsmj](https://github.com/Stmsmj)
+* [Ali Saadati](https://github.com/AliSaadati03)
+* [Amirhossein Aminnegareshi](https://github.com/amirhoprogrammer)
+* [Amirhossein Amjadian](https://github.com/Amir6590hossein)
+* [Hossein Atalou](https://github.com/Atalu09H)
 
