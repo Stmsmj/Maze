@@ -45,8 +45,20 @@ there is 5 difficulties , the easiest is `Kids mode` and the hardest is `God mod
 
 ![Difficulty2](https://github.com/Stmsmj/Maze/assets/105553956/a98e20cf-d736-4f1e-87e4-2b4fce5630fd)
 
+### Generating the Maze
+after slecting the difficulty and language you are ready to generate the maze
+
+>[!TIP]
+>you can use the `Generate instantly` button to skip watching maze generating process
+
+>[!TIP]
+>you can use the `speed bar` to control thee speed of generating process 
+
+Video
+
+
 ### Modes
-the goal is simple , we should start from `green block to the red block`
+the goal is simple , we should start from `green block` to the `red block`
 
 There is 3 different modes
 
