@@ -68,6 +68,15 @@ Video
 #### BFS
 this mode uses the BFS algorithm to find the path between start to end
 
+more information about [BFS algorithm](https://en.wikipedia.org/wiki/Breadth-first_search)
 
+Video
+
+#### DFS
+this mode uses the DFS algorithm to find the path between start to end
+
+more information about [DFS algorithm](https://en.wikipedia.org/wiki/Depth-first_search)
+
+Video
 
 
