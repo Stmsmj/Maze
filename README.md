@@ -45,4 +45,18 @@ there is 5 difficulties , the easiest is `Kids mode` and the hardest is `God mod
 
 ![Difficulty2](https://github.com/Stmsmj/Maze/assets/105553956/a98e20cf-d736-4f1e-87e4-2b4fce5630fd)
 
+### Modes
+the goal is simple , we should start from `green block to the red block`
+
+There is 3 different modes
+
+#### Play
+in this mode you control the game
+
+you should start from green block and reach the red block
+
+>[]
+
+
+
 
