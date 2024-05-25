@@ -49,7 +49,7 @@ there is 5 difficulties , the easiest is `Kids mode` and the hardest is `God mod
 after slecting the difficulty and language you are ready to generate the maze
 
 >[!TIP]
->you can use the `Generate instantly` button to skip watching maze generating process
+>you can use the `Generate instantly` button to skip maze generating process
 
 >[!TIP]
 >you can use the `speed bar` to control thee speed of generating process 
@@ -91,4 +91,14 @@ more information about [DFS algorithm](https://en.wikipedia.org/wiki/Depth-first
 
 Video
 
+# 
+if you like feel free to fork the repo and contributing.
+
+# Contributers
+* [Mehrdad Aramesh]()
+* [Stmsmj]()
+* [Ali Saadati]()
+* [Amirhossein Aminnegareshi]()
+* [Amirhossein Amjadian]()
+* [Hossein Atalou]()
 
