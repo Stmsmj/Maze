@@ -110,7 +110,7 @@ https://github.com/Stmsmj/Maze/assets/105553956/648254bc-47d5-4ce3-8c92-7eb75a5f
 
 # 
 
-if you need more information about the coude checkout the wiki
+if you need more information about the code checkout the wiki
 
 and feel free to fork the repo and contributing.
 
