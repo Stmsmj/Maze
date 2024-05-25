@@ -1,8 +1,8 @@
 # Maze
 a maze game in JAVA for university project
 # Requirements
-I Use ```openjdk version 17.0.2``` and you know JAVA it mybe won't work properly on other versions 
-so if you had problem to run you can try this openjdk version
+I Use ```openjdk version 17.0.2``` and you know JAVA , it mybe won't work properly on other versions 
+so if you had problem to run the program , you can try this openjdk version
 
 >[!NOTE]
 >if you use vscode make sure you have proper version of debugger.
