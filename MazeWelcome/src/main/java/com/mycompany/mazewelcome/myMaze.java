@@ -110,7 +110,7 @@ public class myMaze
     }
 
     //this methode checks game mode and then
-    //passes graphic object g to neede method
+    //passes graphic object g to needed method
     public void drawPathFinder(Graphics g,int mode)
     {
         if(mode == 0)
@@ -127,7 +127,7 @@ public class myMaze
             c.drawPath(g, Color.WHITE);
         }
 
-        //setting color for start ans end cell
+        //setting color for start and end cell
         //green for the start cell and red for the end cell
         Start.Draw_Box(g,new Color(0, 250, 0));
         End.Draw_Box(g,new Color(250, 0, 0));
